@@ -22,3 +22,12 @@ Superliminal is a digital signage solution designed to provide private and comme
 
   * **Designed with Deployment in Mind** - 
   With Superliminal it is possible to ready a single image for deployment to several locations.
+
+## Installation
+  * **Installation Script** -
+  Superliminal includes an installation script that will...
+
+  * **Required Packages ** -
+  Install required packages
+    `apt-get update`
+    `apt-get install apache2 php5 network-manager fbi unclutter matchbox-window-man xorg xserver-xorg php5-curl`
