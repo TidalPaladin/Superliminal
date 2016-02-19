@@ -24,8 +24,10 @@ Superliminal is a digital signage solution designed to provide private and comme
   With Superliminal it is possible to ready a single image for deployment to several locations.
 
 ## Installation
-  * **Installation Script** -
-  Superliminal includes an installation script that will...
+Superliminal was designed and tested on Raspbian Jessie, no other operating systems have been tested at this point.  It is recommended to start with a clean install of Jessie Lite or Jessie.  Superliminal will need to make changes to `rc.local, xinitrc, sudoers` in order to function properly.  If you have made changes to these files that you would like to perserve, please use manual setup.
+
+### Automated Install
+  Superliminal includes a script `namehere.sh` that will automate installation on a fresh operating system.  The script handles installation of required packages
 
   * **Install Required Packages** -
     ```
