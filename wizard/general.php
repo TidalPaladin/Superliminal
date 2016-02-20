@@ -1,3 +1,43 @@
+<!--
+   _____                                 _   _               _                   _ 
+  / ____|                               | | (_)             (_)                 | |
+ | (___    _   _   _ __     ___   _ __  | |  _   _ __ ___    _   _ __     __ _  | |
+  \___ \  | | | | | '_ \   / _ \ | '__| | | | | | '_ ` _ \  | | | '_ \   / _` | | |
+  ____) | | |_| | | |_) | |  __/ | |    | | | | | | | | | | | | | | | | | (_| | | |
+ |_____/   \__,_| | .__/   \___| |_|    |_| |_| |_| |_| |_| |_| |_| |_|  \__,_| |_|
+                  | |                                                              
+                  |_| 
+				  
+Copyright (c) 2016 by Scott Chase Waggener <tidal@utexas.edu>
+				                                                               
+Application: Superliminal
+Description: A digital signage solution designed for Raspberry Pi
+
+File: general.php
+Description: Allows user to configure basic parameters of Superliminal
+
+Details:
+Most program settings are stored in /server_files/settings.ini.  Some settings
+from settings.ini are inserted into other places during boot by rc.local and
+reboot by /server_files/reboot.sh
+
+----------------------------------------------------------------------------------
+This file is part of Superliminal.
+
+Superliminal is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Superliminal is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Superliminal.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
 <head>
 <title></title>
 <link rel="stylesheet" type="text/css" href="/styles/wizard.css">
