@@ -41,3 +41,15 @@ Superliminal was designed and tested on Raspbian Jessie, no other operating syst
     
     git clone https://github.com/TidalPaladin/Superliminal.git
     ```
+  * **Edit Permissions**
+    ```
+    cd /var/www
+    
+    sudo chown -R <USER>:www-data html
+    
+    sudo chmod -R 750 html
+    
+    cd html/server_files
+    
+    sudo chmod 770 accounts.json settings.ini
+    ```
