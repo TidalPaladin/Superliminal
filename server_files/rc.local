@@ -1,0 +1,261 @@
+#!/bin/bash
+#################################################################################################################
+#			Raspberry Pi Dropbox Slideshow v0.1b 		/etc/rc.local 				#
+#			Scott Chase Waggener				1/16/2016				#
+#################################################################################################################
+#
+# This rc.local script runs on boot and organizes all required processes.
+#
+# First config information is read from /boot/settings.txt
+#
+# If in wireless mode the script
+# 	1) Fetches flyers from a dropbox account specified in settings.txt
+#  	2) If internet does not connect witches the PI into an access point.
+#	( An EDIMAX WiFi dongle must be used to host an AP and scan simultaneously with WICD )
+#
+# If in wired mode the script
+#	1) Waits up to 30s for a USB drive to be attached
+#		Path to USB specified in settings.txt, default /dev/sda1
+#	2) Downloads flyers into permanent storage once attached
+#
+#
+
+# Set up variables
+source /var/www/html/settings.ini						#Import settings
+log=/var/log/dropbox/general.log						#Where to log events
+output=/dev/tty0
+
+# Define text colors
+ANSI_COLOR_RED='\x1b[31m'
+ANSI_COLOR_GREEN='\x1b[32m'
+ANSI_COLOR_NORMAL="\x1B[0m"
+
+
+#----------------------------------------------------------------------------------------------------------------
+#						FUNCTIONS							-
+#----------------------------------------------------------------------------------------------------------------
+
+# Read settings from /var/www/html/settings.ini into other places
+function readConfig {
+
+	# Make sure nothing happened to config.txt, if so load from backup
+	if [ -s /boot/config.txt ]; then
+		cp /boot/config.txt.bak config.txt
+	fi
+
+	# Write slideshow setting into slideshow.php (MAYBE DO THIS ALL IN PHP)
+	sed -i "s/.*timeout.*/\t\ttimeout: ${speed}000/g" /var/www/html/slideshow.php
+
+	# Write bootcode_delay into config.txt ( MUST BE DONE IN rc.local )
+	sed -i "s/.*bootcode_delay.*/bootcode_delay=$bootcode_delay/g" /boot/config.txt
+
+	# Write overscan into config.txt
+	if [ $overscan == 'enabled' ]; then
+		sed -i "s/.*disable_overscan.*/#disable_overscan=1/g" /boot/config.txt
+                sed -i "s/.*overscan_left.*/overscan_left=$overscan_x/g" /boot/config.txt
+                sed -i "s/.*overscan_right.*/overscan_right=$overscan_x/g" /boot/config.txt
+                sed -i "s/.*overscan_top.*/overscan_top=$overscan_y/g" /boot/config.txt
+                sed -i "s/.*overscan_bottom.*/overscan_bottom=$overscan_y/g" /boot/config.txt
+
+	else
+		sed -i "s/.*disable_overscan.*/disable_overscan=1/g" /boot/config.txt
+		sed -i "s/.*overscan_left.*/#overscan_left=$overscan_x/g" /boot/config.txt
+		sed -i "s/.*overscan_right.*/#overscan_right=$overscan_x/g" /boot/config.txt
+		sed -i "s/.*overscan_top.*/#overscan_top=$overscan_y/g" /boot/config.txt
+		sed -i "s/.*overscan_bottom.*/#overscan_bottom=$overscan_y/g" /boot/config.txt
+	fi
+
+	# Write hotspot settings into nmcli (MUST BE DONE IN RC.LOCAL)
+	sudo nmcli con modify AP 802-11-wireless.ssid $ssid
+        sudo nmcli con modify AP wifi-sec.psk $wpa_passphrase
+}
+
+# Function to grab flyers from USB
+function usbFlyers {
+	sudo rm /var/www/flyersTempUSB/* &>$log					#Clean temp folder
+	count=0; finished=false
+	while [ $count -lt $maxWaitUSB ]; do
+		printf "\r"
+		echo_Success "Starting in USB mode, waiting $((maxWaitUSB-count))s for USB..."
+		sudo mount $USB /var/www/flyersTempUSB &>$log			#Try to mount usb
+		if [ "$(ls -A /var/www/flyersTempUSB)" ]; then			#If files mounted
+			printf "\r"
+			ls /var/www/flyersTempUSB
+			sudo rm /var/www/html/flyers/*
+			sudo cp /var/www/flyersTempUSB/* /var/www/html/flyers
+			sudo umount $USB
+			break
+		fi
+		sleep 1
+		let count=count+1
+	done
+	printf "\n"
+}
+
+# Function to check for a host file on the SD card
+#function hostSync {
+#	if [ "$(ls /boot/host.txt)" ]; then
+#		sudo mv /var/www/host.txt /var/www/host.txt.bak &>$log
+#		sudo cp /boot/host.txt /var/www/host.txt &>$log
+#	fi
+#}
+
+# Wait some time $MAX for Wifi to come up
+function wait {
+	_IP=$(hostname -I) || true				#Get IP address command
+	count=0							#Loop parameters
+	while ! [ "$_IP" ] && [ $count -lt $maxWait ] && ! [ $wifi_reconfigure ]; do
+		printf "\r"
+		echo_Success "Starting in WIRELESS mode, waiting $((maxWait-count))s for network..."
+		sleep 1
+		_IP=$(hostname -I) || true
+		let count=count+1
+	done
+}
+
+# Function to refresh dropbox if connected
+function connected {
+	printf "\n\n"; echo_Success "My IP address is $_IP\n";
+	#dropboxFetch						#Download flyers from dropbox
+	if [ "$tweet" ]; then
+		sudo python /var/www/twitter/boot.py &>$log &	#Tweet boot info
+	fi
+}
+
+# Funciton to launch flyer slideshow
+function loadDisplay {
+	sudo startx /home/pi/.xinitrc &>/dev/null &
+}
+
+# Function to display OK FAILURE messages
+function echo_Success	{
+	printf "[  "$ANSI_COLOR_GREEN"OK"$ANSI_COLOR_NORMAL"  ] - $1"
+}
+
+function echo_Failure {
+	printf "[  "$ANSI_COLOR_RED"FAILURE"$ANSI_COLOR_NORMAL"  ] - $1"
+}
+
+# Function to run update/upgrade on boot
+function autoUpdate {
+	if [ "$auto_update" ]; then
+		sudo apt-get update -y
+		sudo apt-get upgrade -y
+	fi
+}
+
+# -------------------------------------------- BEGIN DROPBOX FUNCTIONS -------------------------------------------
+
+# Function to fetch from dropbox
+function dropboxFetch {
+	location=flyersTemp                                     	#Set location of temp folder
+	dropbox=/var/www/Dropbox-Uploader/dropbox_uploader.sh   	#Set path of uploader script
+	configPath=/var/www/html/configFiles/$configFile    		#Set location of config file
+	sudo cp /var/www/$location/* /var/www/flyers &>$log        	#Backup flyers
+
+	if [ -e "$configPath" ]; then					#If config file exists
+
+		# Print location of config file being used
+		printf "\n\n============ Prepping Dropbox ============\n"
+
+		# Print info on linked dropbox account
+		sudo $dropbox -f $configPath info
+
+		# Clean the temp folder before execution
+		sudo rm -rfv /var/www/$location &>$log
+		sudo mkdir /var/www/flyersTemp
+
+		# Fetch from Dropbox into the temp folder
+		printf "\n=========== Fetching new flyers =============\n\n"
+		sudo $dropbox -f $configPath -s download / /var/www/$location
+
+		# Fix permissions of downloaded files
+		sudo chmod 775 /var/www/$location
+
+		# If the temp folder isnt empty
+		if [ "$(ls -A /var/www/$location)" ]; then
+        		# Empty the flyers folder
+        		sudo rm -rfv /var/www/html/flyers &>$log
+        		sudo mkdir /var/www/html/flyers
+
+      		  	# Copy from temp folder to flyers folder
+        		sudo cp /var/www/$location/* /var/www/html/flyers &>$log
+
+        		# Fix permissions of flyers folder
+	        	sudo chmod 775 /var/www/html/flyers/*
+
+        		# Log the date of this refresh
+        		echo "`date`">/var/www/twitter/last.txt
+			printf "\n\n"; echo_Success "Dropbox sync complete\n"
+		else
+        		printf "\n\n"; echo_Failure "Dropbox Failure\n"
+		fi
+	elif [[ $mode = *"WIRELESS"* ]]; then
+		notConfigured=true
+		echo_Failure "Dropbox not configured, launching setup...\n"
+
+		# Mark dropbox as needs configuring
+		sudo sed -i "s/.*dropbox_reconfigure.*/dropbox_reconfigure=true/g" /boot/settings.txt
+	fi
+}
+
+# -------------------------------------------- END DROPBOX FUNCTIONS -------------------------------------------
+
+
+# -------------------------------------------- BEGIN HOTSPOT FUNCTIONS -----------------------------------------
+
+# Function that returns the adapter type
+function getAdapter {
+	adapter=$(lsusb | grep 'Edimax')
+	if ! [ -z "$adapter" ]; then
+		adapter="Edimax"
+	else
+		adapter=""
+	fi
+}
+
+
+# Function to print info on launched hotspot
+function printAP {
+	printf "\n\n============ Hotspot Info ==============\n"
+	_IP=$(hostname -I) || true
+	printf "\nESSID:\t\t$ssid\n"
+	printf "IP:\t\t$_IP\n"
+}
+
+# ---------------------------------------------- END HOTSPOT FUNCTIONS ------------------------------------------
+
+# Runs in background looking for trigger PHP file for reboot
+function reboot_wait {
+	while true; do
+		source /var/www/html/reboot
+		if [ $reboot ]; then
+	                sed -i "s/.*reboot.*/reboot=false/g" /var/www/html/reboot
+			sudo reboot
+		fi
+		sleep 1
+	done;
+} 
+
+#----------------------------------------------------------------------------------------------------------------
+#							BODY							-
+#----------------------------------------------------------------------------------------------------------------
+printf "\n"
+readConfig
+
+if [[ $mode = *"WIRELESS"* ]]; then
+	wait									# Wait for network to come up
+	if [ "$_IP" ]; then 							# If connected
+		connected
+	else									# If not connected run AP
+#		getAdapter; configureAP; startAP
+		sudo nmcli con up AP
+		sleep 2
+		printAP
+	fi
+else
+	usbFlyers
+fi
+loadDisplay									#Start slideshow
+#reboot_wait &
+#autoUpdate &>$log &

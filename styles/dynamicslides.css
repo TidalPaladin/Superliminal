@@ -1,0 +1,23 @@
+#myslides {
+	height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow:hidden;
+	overflow-y: hidden;         
+}       
+ 
+#myslides img {   
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow:hidden;     
+	overflow-y: hidden;
+}
+
+html {
+	overflow: hidden;
+	overflow-y: hidden;
+}
+

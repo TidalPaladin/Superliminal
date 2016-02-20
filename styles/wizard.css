@@ -1,0 +1,354 @@
+/* CSS Document */
+
+#head {
+	background-color: black;
+	color: white;
+	font-family: Arial;
+	min-width: 650px;
+	display: inherit;
+	padding: 5px;
+}
+body {
+	font-family: Arial;
+	text-align: center;
+	padding: 0;
+	background-color: D4D4D4;
+	margin: 0 auto;
+}
+.bigBox {
+
+}
+
+#cover {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.6);
+	z-index: 5;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+#loginScreen {
+	height: 380px;
+	width: 340px;
+	margin: 0 auto;
+	position: relative;
+	z-index: 10;
+	display: none;
+	border: 5px solid #cccccc;
+	border-radius: 10px;
+	background-color: white;
+}
+#loginScreen:target, #loginScreen:target + #cover {
+	display: block;
+	opacity: 2;
+}
+.cancel {
+	display: block;
+	position: absolute;
+	top: 3px;
+	right: 2px;
+	background: rgb(245,245,245);
+	color: black;
+	height: 30px;
+	width: 35px;
+	font-size: 30px;
+	text-decoration: none;
+	text-align: center;
+	font-weight: bold;
+}
+.bigLabel {
+	white-space: nowrap;
+	padding: 10px;
+	text-alignment: left;
+	display: inline-block;
+	text-align: center;
+}
+#fields {
+	padding: 0px;
+}
+
+form {
+	padding: 5px;
+	display: inline-block;
+}
+.inputForm {
+	text-align: left;
+	display: table;
+	border-collapse: separate;
+	width: 100%;
+	border-spacing: 0 1em;
+}
+
+.row {
+	text-align: left;
+	white-space: nowrap;
+	display: table-row;
+	width: 100%;
+}
+.row label {
+	display: table-cell;
+	width: 50%;
+	text-align: left;
+	padding-right: 3em;
+}
+.inputForm .row.hidden_setting label {
+	padding-left: 25px;
+}
+
+
+
+.row setting {
+	margin: 0 auto;
+}
+.setting {
+	text-align: left;
+	display: table-cell;
+	vertical-align: center;
+}
+.inputForm .row .setting {
+
+}
+
+.toggles {
+	display: inline-block;
+	float: right;
+	margin-right: 50px;
+}
+.toggles input {
+	float: right;
+	display: inline-block; 
+}
+.toggles div {
+	text-align: left;
+	display: inline-block;
+	width: 100px;
+}
+#buttonBox {
+	display: inline-block;
+	margin: 20px;
+	width: 35%;
+}
+#link {
+	display: inline-block;
+	margin: 20px;
+}
+.submit {
+	-moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
+	box-shadow: inset 0px 1px 0px 0px #ffffff;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
+	background: -moz-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background: -webkit-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background: -o-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background: -ms-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+ 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6', GradientType=0);
+	background-color: #ffffff;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	border: 1px solid #dcdcdc;
+	display: inline-block;
+	cursor: pointer;
+	color: #666666;
+	font-family: Arial;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 6px 24px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #ffffff;
+	text-alignment: center;
+	display: block;
+	margin: 0 auto;
+	width: 120px;
+}
+.submit:hover {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff));
+	background: -moz-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background: -webkit-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background: -o-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background: -ms-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+ 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff', GradientType=0);
+	background-color: #f6f6f6;
+}
+#dropbox {
+	text-alignment: center;
+	width: 100%;
+	text-align: center;
+	margin: 0 auto;
+	height: 70%;
+	top: 5%;
+	position: absolute;
+	display: table;
+}
+.bootScreen .info {
+	text-alignment: center;
+	width: 100%;
+	text-align: center;
+	margin: 0 auto;
+	height: 70%;
+	top: 5%;
+	position: absolute;
+	display: inline-block;
+}
+
+.field {
+	float: right;
+	text-align: left;
+}
+.infoBox {
+	padding: 20px;
+	border: thin solid;
+	margin: 0 auto;
+	background-color: white;
+	display: table-cell;
+}
+.infoBox .row {
+	text-align: left;
+	padding: 10px;
+	display: table-row;
+}
+.infoBox .row  P {
+	padding: 0 20px;
+	display: table-cell;
+}
+#networks {
+	display: table;
+}
+ul {
+	list-style-type: none;
+	background-color: #f1f1f1;
+	overflow: hidden;
+	justify-content: center;
+	margin: 0 auto;
+	padding: 0;
+	width: 100%;
+	display: table;
+}
+li {
+	padding: 0;
+	display: table-cell;
+	min-width: 150px;
+	overflow: hidden;
+	white-space: nowrap;
+	border-left: thin solid black;
+	border-right: thin solid black;
+	border-bottom-width: 2px;
+}
+li a {
+	color: Black;
+	text-decoration: none;
+	font-size: 1.5em;
+	min-width: 200px;
+}
+li hover {
+	background-color: #555;
+	color: white;
+}
+.active {
+	background-color: #4CAF50;
+	color: white;
+}
+.bigBox {
+	display:table;
+	padding: 20px;
+	margin: 0 auto;
+}
+.bootScreen {
+	background-image: url('/resources/startup_display.jpg');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	color: white;
+	overflow: hidden;
+	display: table;
+	width: 100%;
+	height: 1080px;
+}
+.console {
+	background: rgba(30, 30, 30, 0.5);
+	font-size: 1.5em;
+	text-align: center;
+	padding: 15px;
+	display: table;
+	width: 50%;
+	margin: 10% auto;
+	vertical-align: central;
+	
+}
+#dropbox .console h2 {
+	text-align: center;
+}
+
+#loadImage {
+	width: 177px;
+}
+.bootScreen #error {
+	display: none;
+	margin: auto;
+	position: absolute;
+	top: 30%;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	font-size: 2em;
+}
+.bootScreen .loadBar {
+	font-size: 2.8em;
+	display: table-row;
+	vertical-align: center;
+	height: 200px;
+}
+
+.bootScreen .setting {
+	direction: rtl;
+}
+
+.bootScreen .console .arrayContainer{
+	font-size: 1em;
+	text-align: center;
+	/* [disabled]display: table; */
+	height: 100%;
+}
+#dropbox .console #list p {
+
+}
+.panel_grid {
+	width: 48%;
+	display: table-cell;
+}
+.console .arrayContainer p {
+	display: table-row;
+}
+
+
+.bootScreen #wired P{
+	margin: 0;
+	align-self: baseline;
+	position: relative;
+}
+.bootScreen #wired {
+	display: none;
+	margin: auto;
+	position: absolute;
+}
+.bootScreen .loadBar #timer {
+	display: none;
+	margin: 0 auto;
+	font-size: 1.2em;
+}
+#timer {
+	display: table-row;
+	font-size: 1.5em;
+	margin: 0 auto;
+	padding: 20px;
+	text-align: center;
+	position: absolute;
+	width: 99%;
+	bottom: 5%;
+}
+.bootScreen #timer h2 {
+
+}
