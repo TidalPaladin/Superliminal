@@ -33,7 +33,7 @@ Superliminal was designed and tested on Raspbian Jessie, no other operating syst
     ```
     apt-get update
     
-    apt-get install apache2 php5 network-manager fbi unclutter matchbox-window-man xorg xserver-xorg php5-curl
+    apt-get install apache2 php5 network-manager fbi unclutter matchbox-window-man xorg xserver-xorg php5-curl luakit
     ```
   * **Clone**
     ```
