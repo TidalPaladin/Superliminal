@@ -1,3 +1,44 @@
+<!--
+   _____                                 _   _               _                   _ 
+  / ____|                               | | (_)             (_)                 | |
+ | (___    _   _   _ __     ___   _ __  | |  _   _ __ ___    _   _ __     __ _  | |
+  \___ \  | | | | | '_ \   / _ \ | '__| | | | | | '_ ` _ \  | | | '_ \   / _` | | |
+  ____) | | |_| | | |_) | |  __/ | |    | | | | | | | | | | | | | | | | | (_| | | |
+ |_____/   \__,_| | .__/   \___| |_|    |_| |_| |_| |_| |_| |_| |_| |_|  \__,_| |_|
+                  | |                                                              
+                  |_| 
+				  
+Copyright (c) 2016 by Scott Chase Waggener <tidal@utexas.edu>
+				                                                               
+Application: Superliminal
+Description: A digital signage solution designed for Raspberry Pi
+
+File: dropbox.php
+Description: Menu for linking a Dropbox account to Superliminal
+
+Details:
+This web page gives a user options for linking or removing a Dropbox account from
+Superliminal.  Linked accounts, along with Superliminal's app key are stored in
+/server_files/accounts.json.  This page also allows a user to choose which saved
+Dropbox account to use for displaying images.
+
+-----------------------------------------------------------------------------------
+This file is part of Superliminal.
+
+Superliminal is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Superliminal is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Superliminal.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
 <html>
 <head>
 <title></title>
@@ -19,7 +60,7 @@ $appInfo = dbx\AppInfo::loadFromJson($json['dropbox_app_key_secret']);
 $webAuth = new dbx\WebAuthNoRedirect($appInfo, "PHP-Example/1.0", "en");
 $authorizeUrl = $webAuth->start();
 
-// Process 'Use Config' and 'Delete Config'
+// Process 'Use Config' and 'Delete Config' options
 if ( is_writable("$server_files_dir/settings.ini") ) {
 	foreach ($_POST as $key => $value) {
 		if ( !empty($value) && $value != '--' ){
@@ -44,6 +85,7 @@ if ( isset($_POST['authCode']) && !empty($_POST['authCode']) ) {
 // Push JSON array to file
 file_put_contents( "$server_files_dir/accounts.json", json_encode($json) );
 
+// Generate a <select> with all linked Dropbox accounts
 function generateConfigFilesDropdown($array, $id) {
 	echo "<select id=$id name=$id>";
 	foreach ($array as $key => $value) {
@@ -60,6 +102,7 @@ function replaceSetting($setting, $newOption, $file) {
 	}
 }
 
+// (UNFINISHED) Import an accounts.ini master list
 function importFile($target_dir,$inputName) {
 	$target_file = $target_dir . basename($_FILES[$inputName]["name"]);
 	foreach ($_FILES as $key => $value) {
@@ -77,31 +120,30 @@ function importFile($target_dir,$inputName) {
 	<li><a href="/wizard/connect.php">Network</a></li>
 	<li class="active"><a href="/wizard/dropbox.php">Dropbox</a></li>
 </ul>
-
 <div class="bigBox">
 	<div class="infoBox" style='width:50%; max-width: 400px;'>
-	<H1>Add Dropbox Account</H1>
-	<div id='link'>
-		<P> Press the button below to link a Dropbox account.  You
-			will be taken to dropbox.com to authorize the app<br>
-			<br>
-			Return to this page once Dropbox is authorized </P>
-		<input type="button" style="max-width: 200px; min-width: 150px" name="start" value="Link Dropbox" class="submit" onclick="changeForm()">
-	</div>
-		<form id="finish" onsubmit="alert('Token saved')" action="#" method="POST" style="margin: 0 auto; width: 95%; display:none">
-		<P> Enter a name for this config file and paste the code given by dropbox.com </P>
-		<br>
-		<div class='inputForm'>
-			<div class="row">
-				<label>Give config file a name:</label>
-				<input name="configFile" type="text" class="setting"/>
-			</div>
-			<br>
-			<div class="row">
-				<label>Paste authenication here:</label>
-				<input name="authCode" type="text" class="setting"/>
-			</div>
+		<H1>Add Dropbox Account</H1>
+		<div id='link'>
+			<P> Press the button below to link a Dropbox account.  You
+				will be taken to dropbox.com to authorize the app<br>
+				<br>
+				Return to this page once Dropbox is authorized </P>
+			<input type="button" style="max-width: 200px; min-width: 150px" name="start" value="Link Dropbox" class="submit" onclick="changeForm()">
 		</div>
+		<form id="finish" onsubmit="alert('Token saved')" action="#" method="POST" style="margin: 0 auto; width: 95%; display:none">
+			<P> Enter a name for this config file and paste the code given by dropbox.com </P>
+			<br>
+			<div class='inputForm'>
+				<div class="row">
+					<label>Give config file a name:</label>
+					<input name="configFile" type="text" class="setting"/>
+				</div>
+				<br>
+				<div class="row">
+					<label>Paste authenication here:</label>
+					<input name="authCode" type="text" class="setting"/>
+				</div>
+			</div>
 			<br>
 			<input type="submit" style="max-width: 300px" name="finish" value="Apply" class="submit">
 		</form>
@@ -129,7 +171,6 @@ function importFile($target_dir,$inputName) {
 		</form>
 	</div>
 </div>
-
 <script>
 $(document).ready( function() {
 	
@@ -154,10 +195,5 @@ function changeForm() {
 	$('#link').hide();
 	window.open("<?php echo $authorizeUrl ?>");
 }
-
-/*$(function() {
-  $("input[type='file'].filepicker").filepicker();
-});*/
 </script>
-
 </body>
