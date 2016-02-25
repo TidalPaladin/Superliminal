@@ -10,8 +10,6 @@ unclutter -idle 1 -root &
 
 while true; do
 
-	fbset -left 300 -right 300;
-
 	# Kill running instances
 	killall -9 luakit;
 	killall -9 matchbox-window-manager;

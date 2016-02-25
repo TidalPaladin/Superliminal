@@ -1,24 +1,33 @@
 #!/bin/bash
-#################################################################################################################
-#			Raspberry Pi Dropbox Slideshow v0.1b 		/etc/rc.local 				#
-#			Scott Chase Waggener				1/16/2016				#
-#################################################################################################################
+#   _____                                 _   _               _                   _ 
+#  / ____|                               | | (_)             (_)                 | |
+# | (___    _   _   _ __     ___   _ __  | |  _   _ __ ___    _   _ __     __ _  | |
+#  \___ \  | | | | | '_ \   / _ \ | '__| | | | | | '_ ` _ \  | | | '_ \   / _` | | |
+#  ____) | | |_| | | |_) | |  __/ | |    | | | | | | | | | | | | | | | | | (_| | | |
+# |_____/   \__,_| | .__/   \___| |_|    |_| |_| |_| |_| |_| |_| |_| |_|  \__,_| |_|
+#                  | |                                                              
+#                  |_| 				  
+
+# Copyright (c) 2016 by Scott Chase Waggener
+# 
+# File: /etc/rc.local
+# Description: Applies changes made in Superliminal to system files
+#-------------------------------------------------------------------------------------
+# 
+# This file is part of Superliminal.
 #
-# This rc.local script runs on boot and organizes all required processes.
+# Superliminal is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 #
-# First config information is read from /boot/settings.txt
+# Superliminal is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
 #
-# If in wireless mode the script
-# 	1) Fetches flyers from a dropbox account specified in settings.txt
-#  	2) If internet does not connect witches the PI into an access point.
-#	( An EDIMAX WiFi dongle must be used to host an AP and scan simultaneously with WICD )
-#
-# If in wired mode the script
-#	1) Waits up to 30s for a USB drive to be attached
-#		Path to USB specified in settings.txt, default /dev/sda1
-#	2) Downloads flyers into permanent storage once attached
-#
-#
+# You should have received a copy of the GNU General Public License
+# along with Superliminal.  If not, see <http://www.gnu.org/licenses/>.
 
 # Set up variables
 source /var/www/html/server_files/settings.ini &>/dev/null				#Import settings
@@ -100,5 +109,5 @@ function echo_Failure {
 #							BODY							-
 #----------------------------------------------------------------------------------------------------------------
 
-readConfig &>/dev/null
-loadDisplay &>/dev/null								#Start slideshow
+readConfig &>/dev/null						#Apply settings
+loadDisplay &>/dev/null						#Start slideshow
