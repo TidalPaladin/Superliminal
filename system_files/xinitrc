@@ -2,40 +2,30 @@
 mute="&>/dev/null"
 url="http://127.0.0.1/startup.php"
 
+# Show a loading image while X starts
+fbi -T 2 --noverbose /var/www/html/resources/splash.jpg &
+
+# Hide mouse after 1s of inactivity
+unclutter -idle 1 -root &
+
 while true; do
-	fbi -T 2 /var/www/html/resources/background.png &
 
-	# Clean up previously running apps, gracefully at first then harshly
-	killall -9 chromium-browser;
+	fbset -left 300 -right 300;
+
+	# Kill running instances
+	killall -9 luakit;
 	killall -9 matchbox-window-manager;
-
-	# Clean out existing profile information
-	rm -rf /home/pi/.cache;
-	rm -rf /home/pi/.config;
-	rm -rf /home/pi/.pki;
 
 	# Disable DPMS / Screen blanking
 	xset -dpms
 	xset s off
 
-	# Reset the framebuffer's colour-depth
-	fbset -depth $( cat /sys/module/*fb*/parameters/fbdepth );
+	# Once the browser is running, prep to kill loading image
+	(sleep 5; killall -9 fbi) &
 
-	# Hide the cursor (move it to the bottom-right, comment out if you want mouse interaction)
-	xwit -root -warp $( cat /sys/module/*fb*/parameters/fbwidth ) $( cat /sys/module/*fb*/parameters/fbheight )
+	# Start window manager
+	matchbox-window-manager -use_titlebar no -use_cursor yes &
+	luakit $url
 
-	# Start the window manager (remove "-use_cursor no" if you actually want mouse interaction)
-
-	midori -e Fullscreen -a $url &
-	#uzbl -u $url -c /home/pi/uzbl.conf &
-	#iceweasel $url -fullscreen &
-	#epiphany-browser $url &
-	#netsurf $url
-	#chromium-browser --kiosk $url &
-
-	(sleep 5 ; killall -9 fbi)&
-	matchbox-window-manager -use_titlebar no -use_cursor no
-
-	#midori -e Fullscreen -a http://127.0.0.1/startup.php;
 	sleep 1s;
 done;
