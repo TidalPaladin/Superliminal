@@ -47,9 +47,26 @@ Superliminal was designed and tested on Raspbian Jessie, no other operating syst
     
     sudo chown -R <USER>:www-data html
     
-    sudo chmod -R 750 html
+    sudo chmod -R 755 html
+    
+    sudo chown -R root:root html/system_files
+    
+    sudo chmod -R 755 html/system_files
     
     cd html/server_files
     
-    sudo chmod 770 accounts.json settings.ini
+    sudo chmod 775 accounts.json settings.ini
+    ```
+    
+    * **Copy System Files**
+    ```
+    cd /var/www/html/system_files
+    
+    cp xinitrc /boot
+    
+    cp rc.local /etc
+    
+    cp 000-default.conf /etc/apache2/sites-available
+    
+    
     ```
