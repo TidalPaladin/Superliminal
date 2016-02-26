@@ -4,8 +4,8 @@ apt-get install -y apache2 php5 network-manager fbi unclutter matchbox xorg xser
 chown -R :www-data /var/www/html
 chmod -R 755 /var/www/html
 chmod 775 /var/www/html/server_files/accounts.json /var/www/html/server_files/settings.ini
-chown -R root:root html/system_files
-chmod -R 755 html/system_files
+chown -R root:root /var/www/html/system_files
+chmod -R 755 /var/www/html/system_files
 
 cp /var/www/html/system_files/xinitrc /boot
 cp /var/www/html/system_files/rc.local /etc
