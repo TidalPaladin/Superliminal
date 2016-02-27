@@ -143,6 +143,7 @@ function finalTimer() {
 }
 
 function dropbox() {
+	console.log('Initializing Dropbox connection');
 	$.ajax({
 		url:"/server_actions.php",
 		type: "POST",
