@@ -102,13 +102,8 @@ function replaceSetting($setting, $newOption, $file) {
 	}
 }
 
-// (UNFINISHED) Import an accounts.ini master list
-function importFile($target_dir,$inputName) {
-	$target_file = $target_dir . basename($_FILES[$inputName]["name"]);
-	foreach ($_FILES as $key => $value) {
-		move_uploaded_file($_FILES[$inputName]["tmp_name"], $target_file);
-	} 
-}
+if( isset[$_FILES['uploadFile']['tmp_name'] )
+  echo 'File uploaded';
 
 ?>
 <div id="head">
@@ -150,7 +145,12 @@ function importFile($target_dir,$inputName) {
 	</div>
 	<div class='infoBox' style='width:50%; max-width: 400px; border-left:0;'>
 		<H1>Manage Accounts</H1>
-    <a href='/server_files/accounts.json' download>Download</a>
+    <form id="updown" action="#" method="POST" style="">
+    <a href='/server_files/accounts.json' download>
+      <button>Download</button></a>
+      <input type="file" name="uploadFile">
+        <input type="submit" value="Upload File">
+    </form
 		<form id="configs" action="#" method="POST" style="">
 			<div  class='inputForm'>
 				<div class="row">
