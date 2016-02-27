@@ -150,6 +150,7 @@ function importFile($target_dir,$inputName) {
 	</div>
 	<div class='infoBox' style='width:50%; max-width: 400px; border-left:0;'>
 		<H1>Manage Accounts</H1>
+    <a href='/server_files/accounts.json' download>Download</a>
 		<form id="configs" action="#" method="POST" style="">
 			<div  class='inputForm'>
 				<div class="row">
