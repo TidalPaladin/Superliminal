@@ -104,6 +104,7 @@ function replaceSetting($setting, $newOption, $file) {
 
 if( isset($_FILES['uploadFile']['tmp_name']) )
   echo 'File uploaded';
+print_r($FILES);
 
 ?>
 <div id="head">
@@ -145,13 +146,17 @@ if( isset($_FILES['uploadFile']['tmp_name']) )
 	</div>
 	<div class='infoBox' style='width:50%; max-width: 400px; border-left:0;'>
 		<H1>Manage Accounts</H1>
+	<div class='row'>
+		<label>Download accounts file</label>
+		<a class='settings' href='/server_files/accounts.json' download><button>Download</button></a>
+	</div>
     <form id="updown" action="#" method="POST" style="">
-    <a href='/server_files/accounts.json' download>
-      <button>Download</button></a>
-      <input type="file" name="uploadFile">
-        <input type="submit" value="Upload File">
+	<div class='row'>
+        <input type="file" name="uploadFile">
+		<input type='button' class='setting' value='Upload'>
+	</div>
     </form
-		<form id="configs" action="#" method="POST" style="">
+		><form id="configs" action="#" method="POST" style="">
 			<div  class='inputForm'>
 				<div class="row">
 					<label>Use Config:</label>
