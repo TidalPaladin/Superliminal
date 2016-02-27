@@ -65,10 +65,10 @@ switch ($_POST['action']) {
 	case 'scan':
 		get_network();
 		break;
-	//default:
-		//header('HTTP/1.1 500 Internal Server');
-		//die('Invalid function call');
-		//break;
+	default:
+		header('HTTP/1.1 500 Internal Server');
+		die('Invalid function call');
+		break;
 }
 
 // Clean up output from 'iw' scan
@@ -165,8 +165,6 @@ function dropbox_download() {
 	}
 	
 	// Try to set up dropbox
-	
-	
 	$count = 0; $max_tries = 5;
 	$done = false;
 	while ( !$done && $count <= $max_tries ) {

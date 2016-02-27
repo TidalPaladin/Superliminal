@@ -153,7 +153,7 @@ print_r($FILES);
     <form id="updown" action="#" method="POST" style="">
 	<div class='row'>
         <input type="file" name="uploadFile">
-		<input type='button' class='setting' value='Upload'>
+		<input type='submit' class='setting' value='Upload'>
 	</div>
     </form
 		><form id="configs" action="#" method="POST" style="">
