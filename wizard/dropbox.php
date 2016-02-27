@@ -102,7 +102,7 @@ function replaceSetting($setting, $newOption, $file) {
 	}
 }
 
-if( isset[$_FILES['uploadFile']['tmp_name'] )
+if( isset($_FILES['uploadFile']['tmp_name']) )
   echo 'File uploaded';
 
 ?>
