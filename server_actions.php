@@ -42,7 +42,6 @@ error_reporting();
 require_once "/var/www/html/Dropbox/autoload.php";
 use \Dropbox as dbx;
 
-$_POST['action'] = 'dropbox';
 
 if ( !isset($_POST['action']) ) {
 	header('HTTP/1.1 500 No Action Specified');
