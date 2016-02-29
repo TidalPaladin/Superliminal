@@ -1,4 +1,4 @@
-<?php /*?>
+<?php /*
    _____                                 _   _               _                   _ 
   / ____|                               | | (_)             (_)                 | |
  | (___    _   _   _ __     ___   _ __  | |  _   _ __ ___    _   _ __     __ _  | |
@@ -31,7 +31,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with Superliminal.  If not, see <http://www.gnu.org/licenses/>.
-<?php */?>
+*/?>
 
 
 <?php
@@ -66,7 +66,7 @@ switch ($_POST['action']) {
 		get_network();
 		break;
 	default:
-		header('HTTP/1.1 500 Internal Server');
+		header('HTTP/1.1 500 Invalid Call');
 		die('Invalid function call');
 		break;
 }
@@ -161,7 +161,8 @@ function dropbox_download() {
 	}
 	// If target account is missing, return an error
 	else {
-		error_message('Problem with selected dropbox account');
+		header('HTTP/1.1 500 Account Missing');
+		die('Missing Dropbox account');
 	}
 	
 	// Try to set up dropbox
