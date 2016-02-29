@@ -48,7 +48,7 @@ if ( !isset($_POST['action']) ) {
 	header('HTTP/1.1 500 Internal Server');
 	die();
 }
-
+$_POST['action'] = 'dropbox';
 switch ($_POST['action']) {
 	case 'dropbox':
 		dropbox_download();
