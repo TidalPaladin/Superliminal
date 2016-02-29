@@ -42,13 +42,13 @@ error_reporting();
 require_once "/var/www/html/Dropbox/autoload.php";
 use \Dropbox as dbx;
 
-//get_network();
+$_POST['action'] = 'dropbox';
 
 if ( !isset($_POST['action']) ) {
-	header('HTTP/1.1 500 Internal Server');
+	header('HTTP/1.1 500 No Action Specified');
 	die();
 }
-$_POST['action'] = 'dropbox';
+
 switch ($_POST['action']) {
 	case 'dropbox':
 		dropbox_download();
