@@ -147,8 +147,12 @@ function dropbox_download() {
 	$settings = parse_ini_file("$server_files_dir/settings.ini");
 	$json = json_decode(file_get_contents("$server_files_dir/accounts.json"), true);
 	
-	// Set path to local flyers and import to array $local_files
+	// Look for local flyers folder, if no exists make it
 	$flyers_path = '/var/www/html/flyers/';
+	if ( !file_exists($flyers_path) )
+		mkdir($flyers_path, 0770);
+		
+	// Pull local image filenames into $local_files
 	$local = array_slice(scandir($flyers_path), 2);
 	$local_files = array();
 	foreach ($local as $key => $value ) 
