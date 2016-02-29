@@ -176,9 +176,7 @@ function dropbox() {
 			finalTimer();
 		},
 		error: function(jqXHR, textStatus, errorThrown){
-			console.log('Dropbox error');
-			console.log(errorThrown);
-			console.log(textStatus);
+			console.log('Dropbox error: ' + errorThrown);
 			$('#error').show();
 			$('#error_message').html(errorThrown);
 			finalTimer();
