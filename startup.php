@@ -173,13 +173,14 @@ function dropbox() {
 			$('#downloaded').append(list);
 			
 			// Count down time remaining
-			//finalTimer();
+			finalTimer();
 		},
 		error: function(jqXHR, textStatus, errorThrown){
-			$('#error').show();
-			
-			$('#error_message').html(errorThrown);
+			console.log('Dropbox error');
 			console.log(errorThrown);
+			console.log(textStatus);
+			$('#error').show();
+			$('#error_message').html(errorThrown);
 			finalTimer();
 		},
 		complete: function(xhr, textStatus) {
