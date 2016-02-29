@@ -217,13 +217,13 @@ function dropbox_download() {
 			echo json_encode($return, JSON_PRETTY_PRINT);
 		}
 			catch (InvalidArgumentException $e) {
-				header('HTTP/1.1 500 Internal Server');
+				header('HTTP/1.1 500 Network Error?');
 				$string = $e->getMessage(); 
 				$s = explode(': ',$string);
 				die(str_replace( array('}',"\""), '', $s[1] ));
 			}
 			catch ( dbx\Exception $e ) {
-				header('HTTP/1.1 500 Internal Server');
+				header('HTTP/1.1 500 General Dropbox Error');
 				$string = $e->getMessage(); 
 				$s = explode(': ',$string);
 				die( str_replace( array('}',"\""), '', $s[1] ) );
