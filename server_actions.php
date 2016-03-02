@@ -149,7 +149,7 @@ function dropbox_download() {
 	// Look for local flyers folder, if no exists make it
 	$flyers_path = '/var/www/html/flyers/';
 	if ( !file_exists($flyers_path) )
-		mkdir($flyers_path, 0770);
+		mkdir($flyers_path, 0775);
 		
 	// Pull local image filenames into $local_files
 	$local = array_slice(scandir($flyers_path), 2);

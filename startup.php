@@ -65,24 +65,25 @@ $settings = parse_ini_file("$server_files_dir/settings.ini");
 	</div>
 	<div id='right_panel' class='panel_grid'>
 	<div class='console' style=''>
-		<H2>Account Info</H2>
-		<br>
-		<div style='display:table; width:100%'>
-		<div class='row'>
-			<label>Account:</label>
-			<div id='account' class='setting'></div>
-		</div>
-		<br>
-		<div class='row'>
-			<label>Email:</label>
-			<div id='email' class='setting'></div>
-		</div>
-		<br>
-		<div class='row'>
-			<label>Local IP:</label>
-			<div id='ip' class='setting'><?php echo rtrim(shell_exec("ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"))?></div>
-		</div>
-		</div>
+		<table>
+			<thead>
+				<H2>Account Info</H2>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Account:</td>
+					<td id='account'></td>
+				</tr>
+				<tr>
+					<td>Email:</td>
+					<td id='email'></td>
+				</tr>
+				<tr>
+					<td>Local IP:</td>
+					<td id='ip'><?php echo rtrim(shell_exec("ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"))?></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 	</div>
 </div>
@@ -173,7 +174,7 @@ function dropbox() {
 			$('#downloaded').append(list);
 			
 			// Count down time remaining
-			finalTimer();
+			//finalTimer();
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			console.log('Dropbox error: ' + errorThrown);

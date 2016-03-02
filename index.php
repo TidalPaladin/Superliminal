@@ -35,21 +35,14 @@ along with Superliminal.  If not, see <http://www.gnu.org/licenses/>.
 
 <html>
 <head>
-<title>Configuration Wizard</title>
-<?php $server_files_dir = '/var/www/html/server_files';
-$settings = parse_ini_file("$server_files_dir/settings.ini");?>
+<title>Superliminal - Start</title>
 <link rel="stylesheet" type="text/css" href="styles/wizard.css">
-<div id="head">
-	<H1>Superliminal v<?php echo $settings['version']?></H1>
-</div>
+<script src="/scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
 </head>
 <body>
-<ul>
-	<li class="active"><a href="index.php">Start</a></li>
-	<li><a href="/wizard/general.php">General</a></li>
-	<li><a href="/wizard/connect.php">Network</a></li>
-	<li><a href="/wizard/dropbox.php">Dropbox</a></li>
-</ul>
+<div class="add-nav">
+	<script src='/links/navActive.js'></script>
+</div>
 <div class='bigBox'>
 	<div class="infoBox">
 		<H2>Welcome to the configuration wizard</H2>

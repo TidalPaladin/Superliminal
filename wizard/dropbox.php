@@ -41,11 +41,15 @@ along with Superliminal.  If not, see <http://www.gnu.org/licenses/>.
 
 <html>
 <head>
-<title></title>
+<title>Superliminal - Dropbox</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/styles/wizard.css">
 </head>
 <body>
+<div class="add-nav">
+	<script src='/links/navActive.js'></script>
+</div>
+
 <?php
 	
 // Set up generic constants
@@ -104,78 +108,79 @@ function replaceSetting($setting, $newOption, $file) {
 
 if( isset($_FILES['uploadFile']['tmp_name']) )
   echo 'File uploaded';
-print_r($FILES);
+foreach($_FILES as $key => $value)
+	echo $key.' '.$value;
 
 ?>
-<div id="head">
-	<H1>Superliminal v<?php echo $settings['version']?></H1>
-</div>
-<ul>
-	<li><a href="/index.php">Start</a></li>
-	<li><a href="/wizard/general.php">General</a></li>
-	<li><a href="/wizard/connect.php">Network</a></li>
-	<li class="active"><a href="/wizard/dropbox.php">Dropbox</a></li>
-</ul>
-<div class="bigBox">
-	<div class="infoBox" style='width:50%; max-width: 400px;'>
-		<H1>Add Dropbox Account</H1>
-		<div id='link'>
-			<P> Press the button below to link a Dropbox account.  You
-				will be taken to dropbox.com to authorize the app<br>
-				<br>
-				Return to this page once Dropbox is authorized </P>
-			<input type="button" style="max-width: 200px; min-width: 150px" name="start" value="Link Dropbox" class="submit" onclick="changeForm()">
-		</div>
-		<form id="finish" onsubmit="alert('Token saved')" action="#" method="POST" style="margin: 0 auto; width: 95%; display:none">
-			<P> Enter a name for this config file and paste the code given by dropbox.com </P>
-			<br>
-			<div class='inputForm'>
-				<div class="row">
-					<label>Give config file a name:</label>
-					<input name="configFile" type="text" class="setting"/>
-				</div>
-				<br>
-				<div class="row">
-					<label>Paste authenication here:</label>
-					<input name="authCode" type="text" class="setting"/>
-				</div>
-			</div>
-			<br>
-			<input type="submit" style="max-width: 300px" name="finish" value="Apply" class="submit">
-		</form>
-	</div>
-	<div class='infoBox' style='width:50%; max-width: 400px; border-left:0;'>
-		<H1>Manage Accounts</H1>
-	<div class='row'>
-		<label>Download accounts file</label>
-		<a class='settings' href='/server_files/accounts.json' download><button>Download</button></a>
-	</div>
-    <form id="updown" action="#" method="POST" style="">
-	<div class='row'>
-        <input type="file" name="uploadFile">
-		<input type='submit' class='setting' value='Upload'>
-	</div>
-    </form
-		><form id="configs" action="#" method="POST" style="">
-			<div  class='inputForm'>
-				<div class="row">
-					<label>Use Config:</label>
-					<?php $configs = array_slice($json,1);
-						generateConfigFilesDropdown($configs, 'configFile');?>
-				</div>
-				<br>
-				<div class="row">
-					<label>Delete Config:</label>
-					<?php $configs = array_slice($json,1);
-						$configs['--'] = '--';
-						ksort($configs);
-						generateConfigFilesDropdown($configs, 'remove');?>
-				</div>
-			</div>
-			<br>
-			<input type="submit" style="max-width: 300px" name="submit" value="Apply" class="submit">
-		</form>
-	</div>
+
+<div class='mainBackground'>
+<table class='spacedTable'>
+	<thead>
+		<tr>
+			<td><H1>Dropbox Settings</H1></td>
+			<td align='right'>
+				<a href='/help/help-dropbox.html' target='_blank'>Help</a>
+			</td>
+		</tr>
+	</thead>
+	<form id='finish' class='inputForm'>
+		<tbody>
+			<tr>
+				<td colspan='2'><H2>Add Dropbox Account</H2></td>
+			<tr>
+			<tr>
+				<td colspan='2'><P> Press the button below to link a Dropbox account.<br>
+					You will be taken to dropbox.com to authorize the app<br>
+					<br>
+					Return to this page once Dropbox is authorized </P>
+				</td>
+			</tr>
+			<tr>
+				<td colspan='2'>
+					<input type="button" style="max-width: 200px; min-width: 150px" name="start" value="Link Dropbox" class="submit" onclick="changeForm()">
+				</td>
+			</tr>
+			<tr><td colspan='2'><P> Enter a name for this config file and paste the code given by dropbox.com </P></td></tr>
+			<tr>
+				<td>Account Name:</td>
+				<td><input placeholder='Name of config file' name="configFile" type="text" class="setting"/></td>
+			</tr
+			><tr>
+				<td>Dropbox Token:</td>
+				<td><input placeholder='Paste Token Here' name="authCode" type="text" class="setting"/></td>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td colspan='2'><H2>Manage Accounts</H2></td>
+			</tr>
+			<tr>
+				<td>Download Account File</td>
+				<td><a class='settings' href='/server_files/accounts.json' download>
+				<button>Download</button>
+				</a></td>
+			<tr>
+				<td>Upload Account File</td>
+				<td><input type="file" name="uploadFile"></td>
+			</tr>
+			<tr>
+				<td>Use Config:</td>
+				<td><?php $configs = array_slice($json,1);
+								generateConfigFilesDropdown($configs, 'configFile');?>
+				</td>
+			</tr>
+			<tr>
+				<td>Delete Config:</td>
+				<td><?php $configs = array_slice($json,1);
+								$configs['--'] = '--';
+								ksort($configs);
+								generateConfigFilesDropdown($configs, 'remove');?>
+				</td>
+			</tr>
+		</tbody>
+	</form>
+</table>
+<input type="submit" style="max-width: 300px" name="finish" value="Apply" class="submit">
 </div>
 <script>
 $(document).ready( function() {

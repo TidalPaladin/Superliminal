@@ -39,11 +39,14 @@ along with Superliminal.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <head>
-<title></title>
+<title>Superliminal - General</title>
 <link rel="stylesheet" type="text/css" href="/styles/wizard.css">
 <script src="/scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
 </head>
 <body>
+<div class="add-nav">
+	<script src='/links/navActive.js'></script>
+</div>
 <?php
 
 // Set up generic constants
@@ -112,9 +115,10 @@ $(document).ready(function() {
 	var placeholders = <?php echo json_encode($settings)?>;
 	
 	// Setting placeholders for setting inputs
+	console.log('Setting placeholders');
 	$('.general').each(function() {
 		var setting = $(this).attr('name');
-		console.log('setting '+setting+' to '+placeholders[setting]);
+		//console.log('setting '+setting+' to '+placeholders[setting]);
 		$(this).attr('placeholder', placeholders[setting]);
 	});
 	
@@ -190,101 +194,101 @@ function reboot() {
 }
 
 </script>
-<div id="head">
-	<H1>Superliminal v<?php echo $settings['version']?></H1>
-</div>
-<ul>
-	<li><a href="../index.php">Start</a></li>
-	<li class="active"><a href="general.php">General</a></li>
-	<li><a href="connect.php">Network</a></li>
-	<li><a href="dropbox.php">Dropbox</a></li>
-</ul>
-<div class='bigBox'>
-	<div class='infoBox' style="width: 430px;">
-	<H1>General Settings</H1>
-		<form action="#"  id='general' onsubmit='return validateForm()' method="POST" style="width: 400px;">
-			<div class="inputForm">
-				<div class="row">
-					<label>Username:</label>
-					<input name="user" type="text" class="setting login"/>
-				</div>
-				<div class="row">
-					<label>Password:</label>
-					<input name="password" type="text" class="setting login"/>
-				</div>
-				<div class="row">
-					<label>Mode:</label>
-					<select class='setting' name="mode">
-						<option id='mode' value="WIRED">Wired</option>
-						<option id='mode' value="WIRELESS">Wireless</option>
-					</select>
-				</div>
-				<div class="row">
-					<label>Automatic Updates:</label>
-					<select class='setting' name="auto_update">
-						<option id='auto_update' value="update">Enabled</option>
-						<option id='auto_update' value="noUpdate">Disabled</option>
-					</select>
-				</div>
-				<div class="row">
-					<label>Hotspot:</label>
-					<select class='setting' name="hotspot">
-						<option id='hotspot' value="enabled">Enabled</option>
-						<option id='hotspot' value="disabled">Disabled</option>
-					</select>
-				</div>
-				<div class="row">
-					<label>Hotspot SSID:</label>
-					<input name="ssid" type="text" class="setting general"/>
-				</div>
-				<div class="row">
-					<label>Hotspot Passphrase:</label>
-					<input name="wpa_passphrase" type="text" class="setting general"/>
-				</div>
-				<div class="row">
-					<label>Slideshow Interval (s):</label>
-					<input name="speed" type="numeric" class="setting general"/>
-				</div>
-				<div class="row">
-					<label>Max Wait for Network (s):</label>
-					<input name="maxWait" type="numeric" class="setting general"/>
-				</div>
-				<div class="row">
-					<label>Max Wait for USB (s):</label>
-					<input name="maxWaitUSB" type="numeric" class="setting general"/>
-				</div>
-				<div class="row">
-					<label>Delay for TV (s):</label>
-					<input name="bootcode_delay" type="numeric" class="setting general"/>
-				</div>
-				<div class="row">
-					<label>Bootscreen Delay (s):</label>
-					<input name="readDelay" type="numeric" class="setting general"/>
-				</div>
-				<div class="row">
-					<label>Dropbox Config:</label>
-					<?php $configs = array_slice($json,1); generateConfigFilesDropdown($configs, 'configFile');?>
-				</div>
-				<div class="row">
-					<label>Overscan:</label>
-					<select class='setting' name="overscan">
-						<option id='overscan' value="enabled">Enabled</option>
-						<option id='overscan' value="disabled">Disabled</option>
-					</select>
-				</div>
-				<div class="row hidden_setting">
-					<label>Horizontal Overscan:</label>
-					<input name="overscan_x" type="numeric" class="setting general"/>
-				</div>
-				<div class="row hidden_setting">
-					<label>Vertical Overscan:</label>
-					<input name="overscan_y" type="numeric" class="setting general"/>
-				</div>
-			</div>
-			<br>
-			<input type="submit" id="submit" class="submit" value="Apply">
-		</form>
-		<input type="button" value="Reboot" class="submit" onclick="reboot()">
-	</div>
+
+	
+<div class='mainBackground'>
+	<form action="#"  id='general' onsubmit='return validateForm()' method="POST">
+	<table class='spacedTable'>
+		<thead><tr>
+			<td>
+				<H1>General Settings</H1>
+			</td>
+			<td style='text-align:right'>
+				<a href='/help/help-general.html' target='_blank'>Help</a>
+			</td>
+			</tr></thead>
+		<tbody>
+			<tr><td colspan='2'><H2>Login</H2></td></tr>
+			<tr>
+				<td>Username:</td></td>
+				<td><input name="user" type="text" class="setting login"/></td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input name="password" type="text" class="setting login"/></td>
+			</tr>
+			<td><br></td>
+			<tr><td colspan='2'><H2>Hotspot</H2></td></tr>
+				<td>Hotspot:</td>
+				<td><select class='setting' name="hotspot">
+					<option id='hotspot' value="enabled">Enabled</option>
+					<option id='hotspot' value="disabled">Disabled</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td>SSID:</td>
+				<td><input name="ssid" type="text" class="setting general"/></td>
+			</tr>
+			<tr>
+				<td>Passphrase:</td>
+				<td><input name="wpa_passphrase" type="text" class="setting general"/></td>
+			</tr>
+			<td><br></td>
+			<tr><td colspan=2><H2>System</H2></td></tr>
+			<tr>
+				<td>Mode:</td>
+				<td><select class='setting' name="mode">
+					<option id='mode' value="WIRED">USB</option>
+					<option id='mode' value="WIRELESS">Network</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td>Dropbox Account:</td>
+				<td><?php $configs = array_slice($json,1); generateConfigFilesDropdown($configs, 'configFile');?></td>
+			</tr>
+			<tr><td colspan='2'><div class="sublabel"><h4>Wait Times</h4></div></td></tr>
+			<tr>
+				<td>Max Wait for Network (s):</td>
+				<td><input name="maxWait" type="numeric" class="setting general"/></td>
+			</tr>
+			<tr>
+				<td>Max Wait for USB (s):</td>
+				<td><input name="maxWaitUSB" type="numeric" class="setting general"/></td>
+			</tr>
+			<tr>
+				<td>Slideshow Interval (s):</td>
+				<td><input name="speed" type="numeric" class="setting general"/></td>
+			</tr>
+			<tr>
+				<td>Delay for TV (s):</td>
+				<td><input name="bootcode_delay" type="numeric" class="setting general"/></td>
+			</tr>
+			<tr>
+				<td>Bootscreen Delay (s):</td>
+				<td><input name="readDelay" type="numeric" class="setting general"/></td>
+			</tr>
+			<tr><td colspan='2'><div class="sublabel"><h4>Overscan</h4></div></td></tr>
+			<tr>
+				<td>Overscan:</td></td>
+				<td><select class='setting' name="overscan">
+					<option id='overscan' value="enabled">Enabled</option>
+					<option id='overscan' value="disabled">Disabled</option>
+				</select></td>
+			</tr>
+			<tr class="overscan_values">
+				<td>Horizontal Overscan:</td></td>
+				<td><input name="overscan_x" type="numeric" class="setting general"/></td>
+			</tr>
+			<tr class="overscan_values">
+				<td>Vertical Overscan:</td></td>
+				<td><input name="overscan_y" type="numeric" class="setting general"/></td>
+			</tr>
+			<tr>
+				<td><input type="submit" id="submit" class="submit" value="Apply" style='background-color:green'></td>
+				<td><input type="button" value="Reboot" class="submit" onclick="reboot()"></td>
+			</tr>
+		</tbody>
+	</table>
+</form>
 </div>
 </body>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Superliminal - Help</title>
+<link rel="stylesheet" type="text/css" href="/styles/wizard.css">
+</head>
+
+<body style="background-color: lightgrey;">
+<div id="head">
+	<h1>Superliminal</h1>
+</div>
+
+
+<div class="mainBackground" style="text-align:left; max-width: 700px">
+<table>
+	<thead>
+		<tr><td colspan="2" style="text-align:center"><h1>Dropbox Help</h1></td></tr>
+	</thead>
+	<tbody>
+		<tr><td><h2>Linking An Account</h2></td></tr>
+		<tr><td>
+			<p>Clicking the 'Link Dropbox' button will open Dropbox.com in a new tab
+			where you will be asked to authorize Superliminal.  Copy the code given
+			by Dropbox and paste it into the 'Paste authentication here' box.  Give
+			a name to this linked account in the box above.  Multiple accounts can be
+			linked, allowing for easy deployment of a single image to multiple locations
+			</p>
+		</td></tr>
+		<tr><td>
+		<ul style="list-style-type:square">
+			<li>
+				<h4>Account Name</h4>
+				<p>Name by which Superliminal will remember this Dropbox account.  This
+				is only visible to Superliminal, and is used to identify which Dropbox
+				token to use when fetching images.</p>
+			</li>
+			<li>
+				<h4>Dropbox Token</h4>
+				<p>Paste the access token given by dropbox.com into this field.  The
+				token will be generated after you link Superliminal to your Dropbox
+				on Dropbox.com</p>
+			</li>
+		</ul>
+		</td></tr>
+		
+		<tr><td><h2>Manage Accounts</h2></td></tr>
+		<tr><td>
+		<ul style="list-style-type:square">
+			<li>
+				<h4>Download Accounts File</h4>
+				<p>Downloads a file containing a master list of all linked Dropbox accounts.</p>
+			</li>
+			<li>
+				<h4>Upload Accounts File</h4>
+				<p>Uploads a master list of Dropbox accounts (accounts.json).  Uploading this 
+				to a second copy of Superliminanl will import all Dropbox accounts
+				from the first image. </p>
+			</li>
+			<li>
+				<h4>Use Config</h4>
+				<p>The Dropbox account to fetch flyers from.  The list of names given here match
+				the name given under 'Account Name' when the Dropbox account was first added.</p>
+			</li>
+			<li>
+				<h4>Delete Config</h4>
+				<p>Chooses a Dropbox config file to delete.  As of now, deleting the config file
+				does not unlink Superliminal from your Dropbox account.  If necessary, Superliminal
+				can be ulinked from your Dropbox account at Dropbox.com</p>
+			</li>
+		</ul>
+		</td></tr>
+	</tbody>
+</table>
+</div>
+</body>
+</html>
