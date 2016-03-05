@@ -49,8 +49,20 @@ along with Superliminal.  If not, see <http://www.gnu.org/licenses/>.
 </head>
 <body>
 <div class="add-nav">
+<<<<<<< HEAD
 	<script src='/scripts/navActive.js'></script>
 </div>
+=======
+	<script src='/links/navActive.js'></script>
+</div>
+
+<?php
+	
+// Set up generic constants
+$server_files_dir = '/var/www/html/server_files';
+$json=json_decode(file_get_contents("$server_files_dir/accounts.json"), true);
+$settings = parse_ini_file("$server_files_dir/settings.ini");
+>>>>>>> origin/master
 
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
@@ -115,8 +127,87 @@ try {
 	alert_error('Problem with accounts.json file, please try reuploading');
 }
 
+<<<<<<< HEAD
 
 ?>
+=======
+if( isset($_FILES['uploadFile']['tmp_name']) )
+  echo 'File uploaded';
+foreach($_FILES as $key => $value)
+	echo $key.' '.$value;
+
+?>
+
+<div class='mainBackground'>
+<table class='spacedTable'>
+	<thead>
+		<tr>
+			<td><H1>Dropbox Settings</H1></td>
+			<td align='right'>
+				<a href='/help/help-dropbox.html' target='_blank'>Help</a>
+			</td>
+		</tr>
+	</thead>
+	<form id='finish' class='inputForm'>
+		<tbody>
+			<tr>
+				<td colspan='2'><H2>Add Dropbox Account</H2></td>
+			<tr>
+			<tr>
+				<td colspan='2'><P> Press the button below to link a Dropbox account.<br>
+					You will be taken to dropbox.com to authorize the app<br>
+					<br>
+					Return to this page once Dropbox is authorized </P>
+				</td>
+			</tr>
+			<tr>
+				<td colspan='2'>
+					<input type="button" style="max-width: 200px; min-width: 150px" name="start" value="Link Dropbox" class="submit" onclick="changeForm()">
+				</td>
+			</tr>
+			<tr><td colspan='2'><P> Enter a name for this config file and paste the code given by dropbox.com </P></td></tr>
+			<tr>
+				<td>Account Name:</td>
+				<td><input placeholder='Name of config file' name="configFile" type="text" class="setting"/></td>
+			</tr
+			><tr>
+				<td>Dropbox Token:</td>
+				<td><input placeholder='Paste Token Here' name="authCode" type="text" class="setting"/></td>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td colspan='2'><H2>Manage Accounts</H2></td>
+			</tr>
+			<tr>
+				<td>Download Account File</td>
+				<td><a class='settings' href='/server_files/accounts.json' download>
+				<button>Download</button>
+				</a></td>
+			<tr>
+				<td>Upload Account File</td>
+				<td><input type="file" name="uploadFile"></td>
+			</tr>
+			<tr>
+				<td>Use Config:</td>
+				<td><?php $configs = array_slice($json,1);
+								generateConfigFilesDropdown($configs, 'configFile');?>
+				</td>
+			</tr>
+			<tr>
+				<td>Delete Config:</td>
+				<td><?php $configs = array_slice($json,1);
+								$configs['--'] = '--';
+								ksort($configs);
+								generateConfigFilesDropdown($configs, 'remove');?>
+				</td>
+			</tr>
+		</tbody>
+	</form>
+</table>
+<input type="submit" style="max-width: 300px" name="finish" value="Apply" class="submit">
+</div>
+>>>>>>> origin/master
 <script>
 $(document).ready( function() {
 	

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
 <file name="connect.php" server="flyers.local" local="130983034632136478" remote="130983034200000000" Dst="1" />
@@ -16,3 +17,6 @@
 <file name="connect.php" server="192.168.0.7//var/www/html/" local="131016337028531950" remote="131016336980000000" Dst="1" />
 <file name="general.php" server="192.168.0.7//var/www/html/" local="131016372430692729" remote="131016372380000000" Dst="1" />
 </dwsync>
+=======
+<?xml version="1.0" encoding="utf-8" ?><dwsync><file name="connect.php" server="flyers.local" local="130983034632136478" remote="130983034200000000" Dst="1" /><file name="dropbox.php" server="flyers.local" local="130981709289519425" remote="130982209200000000" Dst="1" /><file name="general.php" server="flyers.local" local="130982203557808143" remote="130982209200000000" Dst="1" /><file name="connect.php" server="192.168.0.12" local="131004817298565160" remote="131005033200000000" Dst="1" /><file name="general.php" server="192.168.0.12" local="131004816281129510" remote="131005032000000000" Dst="1" /><file name="dropbox.php" server="192.168.0.12" local="131004816274091650" remote="131005032000000000" Dst="1" /><file name="connect.php" server="192.168.0.6" local="130989216241706499" remote="130989216000000000" Dst="1" /><file name="connect.php" server="192.168.0.9" local="130990836767100779" remote="130990836600000000" Dst="1" /><file name="general.php" server="192.168.0.9" local="130990811029467847" remote="130990810800000000" Dst="1" /><file name="dropbox.php" server="192.168.0.12//var/www/html/" local="3539797374" remote="3539797374" Dst="-1" /><file name="general.php" server="192.168.0.12//var/www/html/" local="3539796461" remote="3539796461" Dst="-1" /><file name="connect.php" server="192.168.0.12//var/www/html/" local="3539797224" remote="3539797225" Dst="-1" /></dwsync>
+>>>>>>> origin/master

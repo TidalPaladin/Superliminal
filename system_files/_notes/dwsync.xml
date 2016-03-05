@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
 <file name="000-default.conf" server="192.168.0.12//var/www/html/" local="131014265030000000" remote="131014265030000000" Dst="1" />
@@ -6,3 +7,6 @@
 <file name="sudoers" server="192.168.0.12//var/www/html/" local="131014265030000000" remote="131014265030000000" Dst="1" />
 <file name="xinitrc" server="192.168.0.12//var/www/html/" local="131014265030000000" remote="131014265030000000" Dst="1" />
 </dwsync>
+=======
+<?xml version="1.0" encoding="utf-8" ?><dwsync><file name="xinitrc" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539797703" Dst="-1" /><file name="sudoers" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539797703" Dst="-1" /><file name="000-default.conf" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539797703" Dst="-1" /><file name="overscan.c" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539797704" Dst="-1" /><file name="rc.local" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539797704" Dst="-1" /></dwsync>
+>>>>>>> origin/master

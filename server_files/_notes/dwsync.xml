@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
 <file name="reboot.sh" server="192.168.0.12" local="3538412303" remote="3538432860" Dst="-1" />
@@ -14,3 +15,6 @@
 <file name="settings.ini" server="192.168.0.12//var/www/html/" local="131012623320000000" remote="131012623320000000" Dst="1" />
 <file name="accounts.json" server="192.168.0.7//var/www/html/" local="131015975800267916" remote="131016783440000000" Dst="1" />
 </dwsync>
+=======
+<?xml version="1.0" encoding="utf-8" ?><dwsync><file name="reboot.sh" server="192.168.0.12" local="3538412303" remote="3538432860" Dst="-1" /><file name="accounts.json" server="192.168.0.12" local="3538366260" remote="3538366260" Dst="-1" /><file name="settings.ini" server="192.168.0.12" local="3538298400" remote="3538298400" Dst="-1" /><file name="overscan" server="192.168.0.12" local="3538377240" remote="3538377240" Dst="-1" /><file name="scan.sh" server="192.168.0.12" local="131004238350340326" remote="131002333200000000" Dst="1" /><file name="scan.sh" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539797703" Dst="-1" /><file name=".htpasswd" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539797703" Dst="-1" /><file name="reboot.sh" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539797703" Dst="-1" /><file name="overscan.c" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539797703" Dst="-1" /><file name="overscan" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539797703" Dst="-1" /></dwsync>
+>>>>>>> origin/master
