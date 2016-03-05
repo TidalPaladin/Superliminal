@@ -5,18 +5,17 @@
 	color: white;
 	font-family: Arial;
 	min-width: 650px;
-	display: inherit;
 	padding: 5px;
 }
 body {
 	font-family: Arial;
 	text-align: center;
 	padding: 0;
-	background-color: D4D4D4;
+	background-color: lightgrey;
 	margin: 0 auto;
 }
-.bigBox {
-
+.sublabel h4 {
+	margin: 10px 20px;
 }
 
 #cover {
@@ -69,46 +68,23 @@ body {
 	padding: 0px;
 }
 
-form {
-	padding: 5px;
-	display: inline-block;
-}
-.inputForm {
-	text-align: left;
-	display: table;
+.mainBackground {
 	border-collapse: separate;
-	width: 100%;
 	border-spacing: 0 1em;
+	background: white;
+	border: solid;
+	display: inline-block;
+	margin: 15px auto;
+	padding: 30px;
 }
 
-.row {
-	text-align: left;
-	white-space: nowrap;
-	display: table-row;
-	width: 100%;
+.error input {
+	border: 1px solid red;
 }
-.row label {
-	display: table-cell;
-	width: 50%;
-	text-align: left;
-	padding-right: 3em;
-}
-.inputForm .row.hidden_setting label {
-	padding-left: 25px;
-}
-
-
-
-.row setting {
-	margin: 0 auto;
-}
-.setting {
-	text-align: left;
-	display: table-cell;
-	vertical-align: center;
-}
-.inputForm .row .setting {
-
+.error p {
+	font-size: 0.75em;
+	color: red;
+	border: none;
 }
 
 .toggles {
@@ -218,7 +194,7 @@ form {
 #networks {
 	display: table;
 }
-ul {
+.navlist {
 	list-style-type: none;
 	background-color: #f1f1f1;
 	overflow: hidden;
@@ -228,7 +204,7 @@ ul {
 	width: 100%;
 	display: table;
 }
-li {
+.navlist li {
 	padding: 0;
 	display: table-cell;
 	min-width: 150px;
@@ -238,20 +214,32 @@ li {
 	border-right: thin solid black;
 	border-bottom-width: 2px;
 }
-li a {
+.navlist li a {
 	color: Black;
 	text-decoration: none;
 	font-size: 1.5em;
 	min-width: 200px;
 }
-li hover {
+.navlist li hover {
 	background-color: #555;
 	color: white;
 }
-.active {
+.navlist .active {
 	background-color: #4CAF50;
 	color: white;
 }
+.spacedTable {
+	border-collapse: separate; 
+	border-spacing: 0.75em 0.75em;
+}
+table {
+	border-collapse: separate;
+	border-spacing: 0.5em 0;
+}
+.setting {
+	font-size: 0.8em;
+}
+
 .bigBox {
 	display:table;
 	padding: 20px;
@@ -302,7 +290,7 @@ li hover {
 	height: 200px;
 }
 
-.bootScreen .setting {
+.bootScreen .data {
 	direction: rtl;
 }
 
@@ -349,6 +337,11 @@ li hover {
 	width: 99%;
 	bottom: 5%;
 }
-.bootScreen #timer h2 {
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
 
+    text-decoration: none;
+    color: initial;
 }

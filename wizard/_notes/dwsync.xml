@@ -9,4 +9,10 @@
 <file name="connect.php" server="192.168.0.6" local="130989216241706499" remote="130989216000000000" Dst="1" />
 <file name="connect.php" server="192.168.0.9" local="130990836767100779" remote="130990836600000000" Dst="1" />
 <file name="general.php" server="192.168.0.9" local="130990811029467847" remote="130990810800000000" Dst="1" />
+<file name="connect.php" server="192.168.0.12//var/www/html/" local="131014546335412164" remote="131014546300000000" Dst="1" />
+<file name="dropbox.php" server="192.168.0.12//var/www/html/" local="131014556632101927" remote="131014556600000000" Dst="1" />
+<file name="general.php" server="192.168.0.12//var/www/html/" local="131014546327306808" remote="131014546300000000" Dst="1" />
+<file name="dropbox.php" server="192.168.0.7//var/www/html/" local="131016825349965296" remote="131016825310000000" Dst="1" />
+<file name="connect.php" server="192.168.0.7//var/www/html/" local="131016337028531950" remote="131016336980000000" Dst="1" />
+<file name="general.php" server="192.168.0.7//var/www/html/" local="131016372430692729" remote="131016372380000000" Dst="1" />
 </dwsync>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Superliminal - Help</title>
+<link rel="stylesheet" type="text/css" href="/styles/wizard.css">
+</head>
+
+
+<body style="background-color: lightgrey;">
+<div id="head">
+	<h1>Superliminal</h1>
+</div>
+
+
+<div class="mainBackground" style="text-align:left; max-width: 700px">
+<table>
+	<thead>
+		<tr><td colspan="2" style="text-align:center"><h1>General Help</h1></td></tr>
+	</thead>
+	<tbody>
+		<tr><td><h2>Login Settings</h2></td></tr>
+		<tr><td>
+		<ul style="list-style-type:square">
+			<li>
+				<h4>Login</h4>
+				<p>Username used to log in to the Superliminal configuration page</p>
+			</li>
+			<li>
+				<h4>Password</h4>
+				<p>Password used to log in to the Superliminal configuration page</p>
+			</li>
+		</ul>
+		</td></tr>
+		
+		<tr><td><h2>Hotspot Settings</h2></td></tr>
+		<tr><td>
+		<ul style="list-style-type:square">
+			<li>
+				<h4>Hotspot</h4>
+				<p>If Superliminal is configured to run in network (non-USB) mode but no network connection is
+				available, Superliminal will host a hotspot.  Administrators can connect to this hotspot and
+				reconfigure network settings without needing to physically access hardware with a mouse and
+				keyboard.</p>
+			</li>
+			<li>
+				<h4>SSID</h4>
+				<p>The name (ESSID) of the hotspot</p>
+			</li>
+			<li>
+				<h4>Passphrase</h4>
+				<p>The WPA2 passphrase of the hotspot.  This must be at least 8 alphanumeric charaters long</p>
+			</li>
+		</ul>
+		</td></tr>
+		
+		<tr><td><h2>System Settings</h2></td></tr>
+		<tr><td>
+		<ul style="list-style-type:square">
+			<li>
+				<h4>Mode</h4>
+				<p>
+				In USB mode flyers are fetched from a USB drive at boot.  
+				In Network mode flyers are fetched from a dropbox account over the network.
+				</p>
+			</li>
+			<li>
+				<h4>Dropbox Account</h4>
+				<p>Name of the Dropbox account to fetch flyers from.  This is the name given
+				when the account was first added.</p>
+			</li>
+			<li>
+				<h4>Max Wait for Network</h4>
+				<p>The maximum time in seconds to wait for network connectivity.  Only applicable when
+				in 'Network' mode.  If the network is still down at the end of this interavl,
+				the slideshow will launch using flyers from the last successful run.</p>
+			</li>
+			<li>
+				<h4>Max Wait for USB</h4>
+				<p>The maximum time in seconds to wait for a USB drive to be inserted.  Only applicable
+				when in 'USB' mode.  If no USB drive has been inserted at the end of this
+				interval, the slideshow will launch using flyers from the last successful run.</p>
+			</li>
+			<li>
+				<h4>Slideshow Interval</h4>
+				<p>The time in seconds to show a flyer before transitioning to the next.</p>
+			</li>
+			<li>
+				<h4>Delay for TV</h4>
+				<p>The time in seconds to postpone booting upon receiving power.  This helps prevent
+				HDMI detection issues when the TV and Superliminal power on at the same time.</p>
+			</li>
+			<li>
+				<h4>Bootscreen Delay</h4>
+				<p>The time in seconds to show flyer information before launching the slideshow.
+				This is also the interval over which a user may press any key to enter setup.</p>
+			</li>
+			<li>
+				<h4>Overscan</h4>
+				<p>Enables or disables overscanning to better fit the slideshow to the display.
+				This should be used if there is a black border at the edge of the display, or
+				if the display cuts off part of the slideshow.  This will require a reboot before
+				values can be configured.</p>
+			</li>
+			<li>
+				<h4>Overscan Values</h4>
+				<p>Amount to compress or expand the slideshow.  Use positive values if a black
+				border is visible.  Use negative values if the slideshow extends beyond the screen
+				</p>
+			</li>
+		</ul>
+		</td></tr>
+		
+	</tbody>
+</table>
+</div>
+</body>
+</html>

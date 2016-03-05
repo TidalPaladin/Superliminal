@@ -64,6 +64,12 @@ switch ($_POST['action']) {
 	case 'scan':
 		get_network();
 		break;
+	case 'reboot':
+		reboot();
+		break;
+	case 'download':
+		download();
+		break;
 	default:
 		header('HTTP/1.1 500 Invalid Call');
 		die('Invalid function call');
@@ -149,7 +155,7 @@ function dropbox_download() {
 	// Look for local flyers folder, if no exists make it
 	$flyers_path = '/var/www/html/flyers/';
 	if ( !file_exists($flyers_path) )
-		mkdir($flyers_path, 0770);
+		mkdir($flyers_path, 0775);
 		
 	// Pull local image filenames into $local_files
 	$local = array_slice(scandir($flyers_path), 2);
@@ -261,5 +267,10 @@ function reboot() {
 	exec('sudo /var/www/html/server_files/reboot.sh');
 }
 
+function download() {
+	header("Content-disposition: attachment; filename=http://www.mydomain.org/pdf/book.pdf");
+	header("Content-type: application/pdf:");
+	readfile("http://127.0.0.1");
+}
 
 ?>
