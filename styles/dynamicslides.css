@@ -8,6 +8,7 @@
 }       
  
 #myslides img {   
+	display: inline;
 	height: 100%;
 	width: 100%;
 	margin: 0;
@@ -17,7 +18,30 @@
 }
 
 html {
+	height:100%;
+	width: 100%;
+	font-family: Arial;
 	overflow: hidden;
 	overflow-y: hidden;
+	min-height: 0;
+}
+
+#error {
+	color:white; 
+	font-size: 2em;
+	display:table-cell;
+	vertical-align: middle;
+	text-align: center;
+	position: relative;
+	
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: black;
+	display:table;
+	height:100%;
+	width: 100%;
 }
 

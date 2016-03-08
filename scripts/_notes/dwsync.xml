@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
 <file name="jquery-2.1.4.min.js" server="192.168.0.12" local="130994782750000000" remote="131000732400000000" Dst="1" />
@@ -10,14 +9,16 @@
 <file name="startup.js" server="192.168.0.12//var/www/html/" local="131014545634611589" remote="131014545630000000" Dst="1" />
 <file name="functions.js" server="192.168.0.12//var/www/html/" local="131014502037404682" remote="131014546290000000" Dst="1" />
 <file name="navActive.js" server="192.168.0.12//var/www/html/" local="131014259580000000" remote="131014546300000000" Dst="1" />
-<file name="functions.js" server="192.168.0.7//var/www/html/" local="131016785725744726" remote="131016785680000000" Dst="1" />
-<file name="navActive.js" server="192.168.0.7//var/www/html/" local="131014259580000000" remote="131015115590000000" Dst="1" />
-<file name="jquery-validate.js" server="192.168.0.7//var/www/html/" local="131015127341406583" remote="131015127320000000" Dst="1" />
+<file name="functions.js" server="192.168.0.7//var/www/html/" local="131018020256664565" remote="131018020200000000" Dst="1" />
+<file name="navActive.js" server="192.168.0.7//var/www/html/" local="131018657193994536" remote="131018657170000000" Dst="1" />
 <file name="jquery-2.1.4.min.js" server="192.168.0.7//var/www/html/" local="131013256590000000" remote="131013256590000000" Dst="1" />
-<file name="functions.php" server="192.168.0.7//var/www/html/" local="131016786012680835" remote="131016785970000000" Dst="1" />
-<file name="startup.js" server="192.168.0.7//var/www/html/" local="131015988378744914" remote="131016028000000000" Dst="1" />
-<file name="ajax_actions.php" server="192.168.0.7//var/www/html/" local="131016818779724890" remote="131016818740000000" Dst="1" />
+<file name="functions.php" server="192.168.0.7//var/www/html/" local="131018864400078063" remote="131018864350000000" Dst="1" />
+<file name="startup.js" server="192.168.0.7//var/www/html/" local="131018680634470932" remote="131018680580000000" Dst="1" />
+<file name="ajax_actions.php" server="192.168.0.7//var/www/html/" local="131018849264081697" remote="131018849210000000" Dst="1" />
+<file name="jquery-2.1.4.min.js" server="192.168.0.3//var/www/html/" local="131013256590000000" remote="131013256590000000" Dst="1" />
+<file name="jquery.cycle2.min.js" server="192.168.0.3//var/www/html/" local="131013339490000000" remote="131013339490000000" Dst="1" />
+<file name="functions.js" server="192.168.0.3//var/www/html/" local="131018020256664565" remote="131018895310000000" Dst="1" />
+<file name="startup.js" server="192.168.0.3//var/www/html/" local="131018680634470932" remote="131018895310000000" Dst="1" />
+<file name="navActive.js" server="192.168.0.3//var/www/html/" local="131018657193994536" remote="131018912920000000" Dst="1" />
+<file name="functions.php" server="192.168.0.3//var/www/html/" local="131018913781389758" remote="131018913730000000" Dst="1" />
 </dwsync>
-=======
-<?xml version="1.0" encoding="utf-8" ?><dwsync><file name="jquery-2.1.4.min.js" server="192.168.0.12" local="130994782750000000" remote="131000732400000000" Dst="1" /><file name="jquery.cycle2.min.js" server="192.168.0.12" local="130994782750000000" remote="131000734200000000" Dst="1" /><file name="jquery.cycle2.min.js" server="D:/Google Drive/Documents/flyerSite/" local="130994782750000000" remote="130994782750000000" Dst="1" /><file name="jquery-2.1.4.min.js" server="D:/Google Drive/Documents/flyerSite/" local="130994782750000000" remote="130994782750000000" Dst="1" /><file name="jquery-2.1.4.min.js" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539696859" Dst="-1" /><file name="jquery.cycle2.min.js" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539705149" Dst="-1" /></dwsync>
->>>>>>> origin/master

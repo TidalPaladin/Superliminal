@@ -9,6 +9,10 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+	
+	if( !$('#myslides').html() )
+		$('#error').show();
+	
 	$('#myslides').cycle({
 		fit: 1, pause: 2,
 		fx: 'none',
@@ -18,18 +22,18 @@ $(document).ready(function(){
 </script>
 <link rel="stylesheet" href="styles/dynamicslides.css" type="text/css" media="screen" />
 </head>
-<body style="margin: 0;">
+<body>
 
 <?php
 $directory = 'flyers/';
 try {
-	// Styling for images
+	// Styling for images  
 	echo "<div id=\"myslides\">";
 	foreach ( new DirectoryIterator($directory) as $item ) {
 		if ($item->isFile()) {
 			$path = $directory.$item;
 			$file_parts = pathinfo($item)['extension'];
-			$imgExt = Array("jpg","JPG","png","PNG");
+			$imgExt = Array("jpg","JPG","png","PNG","jpeg","JPEG");
 			if (in_array($file_parts, $imgExt)){
 				echo "<img src=\"" . $path . "\" />";
 			} else{
@@ -40,8 +44,11 @@ try {
 	echo "</div>";
 }
 catch(Exception $e) {
-	echo 'No images found for this slideshow.<br />';
 }
 ?>
+
+<div id='error' style='display:none'>
+<h1>No images found</h1>
+</div>
 </body>
 </html>

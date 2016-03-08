@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
 <file name="ajax-loader.gif" server="192.168.0.12" local="130994776240000000" remote="131000732400000000" Dst="1" />
@@ -13,9 +12,11 @@
 <file name="background.jpg" server="192.168.0.12//var/www/html/" local="131014265020000000" remote="131014265020000000" Dst="1" />
 <file name="splash.jpg" server="192.168.0.12//var/www/html/" local="131014265020000000" remote="131014265020000000" Dst="1" />
 <file name="startup_display.jpg" server="192.168.0.12//var/www/html/" local="131012922340000000" remote="131012922340000000" Dst="1" />
-<file name="startup_display.jpg" server="192.168.0.7//var/www/html/" local="131012922340000000" remote="131012922340000000" Dst="1" />
+<file name="startup_display.jpg" server="192.168.0.7//var/www/html/" local="131018677285679444" remote="131018677370000000" Dst="1" />
 <file name="ajax-loader.gif" server="192.168.0.7//var/www/html/" local="131013311110000000" remote="131013311110000000" Dst="1" />
+<file name="favicon.ico" server="192.168.0.7//var/www/html/" local="131018562181601692" remote="131018636320000000" Dst="1" />
+<file name="favicon.png" server="192.168.0.7//var/www/html/" local="131018572016703682" remote="131018572890000000" Dst="1" />
+<file name="splash.jpg" server="192.168.0.7//var/www/html/" local="131018865690128885" remote="131018865920000000" Dst="1" />
+<file name="favicon.ico" server="192.168.0.3//var/www/html/" local="131018562181601692" remote="131018895310000000" Dst="1" />
+<file name="ajax-loader.gif" server="192.168.0.3//var/www/html/" local="131013311110000000" remote="131013311110000000" Dst="1" />
 </dwsync>
-=======
-<?xml version="1.0" encoding="utf-8" ?><dwsync><file name="ajax-loader.gif" server="192.168.0.12" local="130994776240000000" remote="131000732400000000" Dst="1" /><file name="background.jpg" server="192.168.0.12" local="130999068510000000" remote="131000732400000000" Dst="1" /><file name="background.jpg" server="D:/Google Drive/Documents/flyerSite/" local="130999068510000000" remote="130999068510000000" Dst="1" /><file name="ajax-loader.gif" server="D:/Google Drive/Documents/flyerSite/" local="130994776240000000" remote="130994776240000000" Dst="1" /><file name="startup_display.jpg" server="D:/Google Drive/Documents/flyerSite/" local="131004114640237361" remote="131004114640000000" Dst="1" /><file name="splash.jpg" server="D:/Google Drive/Documents/flyerSite/" local="131004114446984286" remote="131004114440000000" Dst="1" /><file name="startup_display.jpg" server="192.168.0.12" local="131004114640237361" remote="131004334800000000" Dst="1" /><file name="splash.jpg" server="192.168.0.12" local="131004114446984286" remote="131004334800000000" Dst="1" /><file name="startup_display.jpg" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539663434" Dst="-1" /><file name="ajax-loader.gif" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539702311" Dst="-1" /><file name="splash.jpg" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539797702" Dst="-1" /><file name="background.jpg" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539797702" Dst="-1" /></dwsync>
->>>>>>> origin/master

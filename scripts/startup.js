@@ -47,6 +47,7 @@ function dropbox() {
 			console.log('Fetched ' + data['downloaded'].length + ' files from Dropbox, deleted ' + data['deleted'].length + ' local files');
 
 			// If success, display Dropbox info
+			$('.bootScreen').css('background-image', "url('/resources/startup_display.jpg')");
 			$('#dropbox').show();
 			$('#account').html(data['account']['display_name']);
 			$('#email').html(data['account']['email']);

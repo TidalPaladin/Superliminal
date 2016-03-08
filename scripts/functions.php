@@ -57,6 +57,10 @@ $settings = update_settings_ini();
 
 ?><script>var placeholders = <?php echo json_encode($settings)?>;</script><?php
 
+if( isset($_POST) && !empty($_POST) )
+	echo '<script>alert("Settings saved.");</script>';
+
+
 // array update_settings_ini([$settings])
 // Replaces $setting with $newOption in ini $file and returns new ini as array
 function update_settings_ini() {
@@ -123,8 +127,9 @@ function generateNetworksDropdown($array,$id) {
 		return false;
 	echo "<select class='setting' name='nmcli[".$id."]'>";
 	foreach ($array as $key => $value) {
-		if ( $value != 'AP' )
-			echo "<option id='network' value='$value'> $value </option>\n";
+		$name = $value['name'];
+		if ( $value['name'] )
+			echo "<option id='network' value=$name> $name </option>";
 	}
 	echo "</select>";
 	return true;
@@ -180,33 +185,109 @@ function update_nmcli() {
 	return true;
 }
 
-// array nmcli_get_networks()
-// Returns an array of nmcli networks, plus '--' as a placeholder at position 0
-function nmcli_get_networks() {
-	$networks = array_filter(explode("\n", shell_exec('sudo nmcli -t -f NAME con show')) );
+// array nmcli_get_networks([string $append])
+// Returns an array of nmcli networks, plus $append as a placeholder at position 0
+// This only returns wireless networks
+function nmcli_get_networks($append = false) {
+	$network_names = array_filter(explode("\n", shell_exec('sudo nmcli -t -f NAME con show')) );
+	$network_types = array_filter(explode("\n", shell_exec('sudo nmcli -t -f TYPE con show')) );
+	
+	// Build array, trip eth and 'AP' connections
+	foreach( $network_names as $key => $value )
+		if( $value != 'AP' && $network_types[$key] != '802-3-ethernet' )
+			$networks[$key] = array('name' => $network_names[$key], 'type' => $network_names[$key]);
+	
 	sort($networks);
-	array_unshift( $networks, '--' );
+	if( $append )
+		array_unshift($networks, array('name' => $append, 'type' => 'placeholder') );
 	return $networks;
 }
+
+// array nmcli_get_status([string $output])
+// Returns an array based on $output
+// Default - returns an array of devices and statuses
+// 'connected' - returns an array of connected devices
+function nmcli_get_status($output = false, $get_signal = false) {
+	
+	// Run commands to fill columns
+	$dev = explode(PHP_EOL, shell_exec('nmcli -t -f device dev status'));
+	$type = explode(PHP_EOL, shell_exec('nmcli -t -f type dev status'));
+	$state = explode(PHP_EOL, shell_exec('nmcli -t -f state dev status'));
+	$connection = explode(PHP_EOL, shell_exec('sudo nmcli -t -f connection dev status')); 
+	$master = array(); 
+	
+	// Parse columns
+	foreach( $dev as $key => $value ) {
+		if( $value != 'lo' && !empty($value) ) {
+			$master[$key] = array('dev' => $dev[$key], 'type' => $type[$key], 'state' => $state[$key], 'con' => $connection[$key],'ip' => get_ip($dev[$key]) );
+		
+			// If connected and wireless, get signal strength info
+			if( $get_signal && $master[$key]['state'] == 'connected' && $master[$key]['type'] == 'wifi' && $master[$key]['con'] != 'AP' ) {
+				$db = explode(' ',shell_exec('iw dev wlan0 link | grep signal'))[1];
+				if($db <= -100)
+					$quality = 0;
+				else if($db >= -50)
+					$quality = 100;
+				else
+        			$quality = 2 * ($db + 100);
+				$master[$key]['signal'] = $quality;
+			}
+		}
+	}
+	
+	if( !$output )
+		return $master;
+	else if ( $output == 'connected' ) {
+		$return = array();
+		foreach( $master as $key => $value )
+			if( $value['state'] == 'connected' ) 
+				array_push($return, $master[$key]);
+		return $return;
+	}
+	else if ( $output == 'wifi' ) {
+		$return = array();
+		foreach( $master as $key => $value ) {
+			if( $value['type'] == 'wifi' ) {
+				array_push($return, $master[$key]);
+			}
+		}
+		return $return;
+	}
+	else
+		return false;
+	$local_ip = rtrim(shell_exec("ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"));
+}
+
+//string get_ip([string $dev])
+// Returns a list of local ip information
+// Optional $dev specifies a single device (ex 'wlan0')
+function get_ip($dev = false) {
+	if( !$dev )
+		$local_ip = rtrim(shell_exec("ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"));
+	else
+		$local_ip = rtrim(shell_exec("ifconfig ".$dev." | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"));
+	return $local_ip;
+	
+}
+		
+		
 
 // bool nmcli_network_up([string $dev], [string $network])
 // Puts up nmcli network $network or device $dev
 function nmcli_network_up($dev = false, $network = false) {
 	if( !$dev ) {
-		$network = escapeshellarg($network);
-		exec('sudo nmcli con up '.$network, $output, $return_var);
+		exec("sudo nmcli con up ".$network, $output, $return_var);
 		return $return_var;
 	}
 	else if( !$network ) {
-		$dev = escapeshellarg($dev);
 		exec('sudo nmcli dev connect '.$dev, $output, $return_var);
 		return $return_var;
 	}
 	else {
-		$dev = escapeshellarg($dev);
 		exec('sudo nmcli dev connect '.$dev, $output, $return_var);
 		return $return_var;
 	}
+	
 }
 
 function debug_to_console( $message ) {

@@ -62,7 +62,7 @@ switch ($_POST['action']) {
 		hotspot();
 		break;
 	case 'scan':
-		get_network();
+		scan_networks();
 		break;
 	case 'reboot':
 		reboot();
@@ -82,7 +82,7 @@ function parse_iw($needle,$haystack){
 }
 
 // Returns a JSON of scanned networks and their signal strength
-function get_network() {
+function scan_networks() {
 	$string = shell_exec('sudo /var/www/html/server_files/scan.sh');
 	$networks = explode('(on wlan0)', $string);
 	foreach( $networks as $key => $value )
@@ -177,11 +177,10 @@ function dropbox_download() {
 	// Try to set up dropbox
 	$count = 0; $max_tries = 5;
 	$done = false;
-	while ( !$done && $count <= $max_tries ) {
+	while ( !$done ) {
 		try {
 			// Set up client, get folder meta and account info
 			$dbxClient = new dbx\Client($accessToken, "PHP-Example/1.0");
-			$done = true;
 			$folderMetadata = $dbxClient->getMetadataWithChildren("/");
 			$accountInfo = $dbxClient->getAccountInfo();
 			
@@ -224,18 +223,28 @@ function dropbox_download() {
 				'account' => $accountInfo
 			);
 			echo json_encode($return, JSON_PRETTY_PRINT);
+			$done = true;
 		}
 			catch (InvalidArgumentException $e) {
-				header('HTTP/1.1 500 Network Error?');
-				$string = $e->getMessage(); 
-				$s = explode(': ',$string);
-				die(str_replace( array('}',"\""), '', $s[1] ));
+				$count++;
+				exec('sudo nmcli dev connect wlan0');
+				if( $count > $max_tries ) {
+					header('HTTP/1.1 500 Network Error?');
+					$string = $e->getMessage(); 
+					$s = explode(': ',$string);
+					die(str_replace( array('}',"\""), '', $s[1] ));
+				}
 			}
 			catch ( dbx\Exception $e ) {
-				header('HTTP/1.1 500 General Dropbox Error');
-				$string = $e->getMessage(); 
-				$s = explode(': ',$string);
-				die( str_replace( array('}',"\""), '', $s[1] ) );
+				$count++;
+				// Make sure connection is properly up
+				exec('sudo nmcli dev connect wlan0');
+				if( $count > $max_tries ) {
+					header('HTTP/1.1 500 General Dropbox Error');
+					$string = $e->getMessage(); 
+					$s = explode(': ',$string);
+					die( str_replace( array('}',"\""), '', $s[1] ) );
+				}
 			}
 		
 	}
@@ -246,7 +255,7 @@ function dropbox_download() {
 function getConnectivity($count) {
 	$local_ip = rtrim(shell_exec("ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"));
 								
-	$connected = @fsockopen("www.google.com", 80);
+	$connected = @fsockopen("www.dropbox.com", 80);
     if ($connected){
 		$is_conn = 'true';
 		fclose($connected);
@@ -271,6 +280,10 @@ function download() {
 	header("Content-disposition: attachment; filename=http://www.mydomain.org/pdf/book.pdf");
 	header("Content-type: application/pdf:");
 	readfile("http://127.0.0.1");
+}
+
+function update() {
+	exec('git pull /var/www/html');
 }
 
 ?>

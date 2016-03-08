@@ -5,11 +5,14 @@ $(document).ready(function() {
 	
 	// Load header, set active button
 	$('.add-nav').load('/links/top_header.php', function() {
-		console.log('Setting active nav button');
 		var matched = false;
-		
+
 		// Get name of current page
-		var current_file = document.location.pathname.match(/[^\/]+$/)[0];
+		if( document.location.pathname.match(/[^\/]+$/) )
+			var current_file = document.location.pathname.match(/[^\/]+$/)[0];
+		else
+			var current_file = 'index.php';
+		console.log('Setting active nav button: '+current_file);
 		
 		// Set proper navlist element to active
 		$('.navlist').find('a').each(function(key, value) {

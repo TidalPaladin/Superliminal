@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
 <file name="index.php" server="192.168.0.12" local="131004816266823345" remote="131005032000000000" Dst="1" />
@@ -12,8 +11,8 @@
 <file name="setup.sh" server="192.168.0.12//var/www/html/" local="131014265040000000" remote="131014265040000000" Dst="1" />
 <file name="slideshow.php" server="192.168.0.12//var/www/html/" local="131013339480000000" remote="131013339480000000" Dst="1" />
 <file name="startup.php" server="192.168.0.12//var/www/html/" local="131014546323589842" remote="131014546290000000" Dst="1" />
-<file name="startup.php" server="192.168.0.7//var/www/html/" local="131014546323589842" remote="131015958970000000" Dst="1" />
+<file name="startup.php" server="192.168.0.7//var/www/html/" local="131018862296569744" remote="131018862240000000" Dst="1" />
+<file name="index.php" server="192.168.0.7//var/www/html/" local="131018658548492155" remote="131018658500000000" Dst="1" />
+<file name="slideshow.php" server="192.168.0.3//var/www/html/" local="131018901266712770" remote="131018901290000000" Dst="1" />
+<file name="startup.php" server="192.168.0.3//var/www/html/" local="131018914440469319" remote="131018914390000000" Dst="1" />
 </dwsync>
-=======
-<?xml version="1.0" encoding="utf-8" ?><dwsync><file name="index.php" server="192.168.0.12" local="131004816266823345" remote="131005032000000000" Dst="1" /><file name="startup.php" server="192.168.0.12" local="131004820965828276" remote="131005036800000000" Dst="1" /><file name="slideshow.php" server="192.168.0.12" local="130999073240000000" remote="131004377400000000" Dst="1" /><file name="slideshow.php" server="D:/Google Drive/Documents/flyerSite/" local="130999073240000000" remote="130999073240000000" Dst="1" /><file name="startup.php" server="D:/Google Drive/Documents/flyerSite/" local="131000600966941796" remote="131000600960000000" Dst="1" /><file name="server_actions.php" server="192.168.0.12" local="131004820247453827" remote="131005036200000000" Dst="1" /><file name="index.php" server="192.168.0.12//var/www/html/" local="3539797838" remote="3539797838" Dst="-1" /><file name="startup.php" server="192.168.0.12//var/www/html/" local="3539711273" remote="3539797704" Dst="-1" /><file name="slideshow.php" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539705148" Dst="-1" /><file name="server_actions.php" server="192.168.0.12//var/www/html/" local="3539636060" remote="3539705449" Dst="-1" /><file name="setup.sh" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539797704" Dst="-1" /><file name="README.md" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539797704" Dst="-1" /><file name="LICENSE.md" server="192.168.0.12//var/www/html/" local="3539388735" remote="3539797704" Dst="-1" /></dwsync>
->>>>>>> origin/master

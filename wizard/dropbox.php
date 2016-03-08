@@ -45,24 +45,12 @@ along with Superliminal.  If not, see <http://www.gnu.org/licenses/>.
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/styles/wizard.css">
 <script src="/scripts/functions.js" type="text/javascript"></script>
-<script src="/scripts/jquery-validate.js" type="text/javascript"></script>
+<link rel="shortcut icon" href="/resources/favicon.ico"/>
 </head>
 <body>
 <div class="add-nav">
-<<<<<<< HEAD
 	<script src='/scripts/navActive.js'></script>
 </div>
-=======
-	<script src='/links/navActive.js'></script>
-</div>
-
-<?php
-	
-// Set up generic constants
-$server_files_dir = '/var/www/html/server_files';
-$json=json_decode(file_get_contents("$server_files_dir/accounts.json"), true);
-$settings = parse_ini_file("$server_files_dir/settings.ini");
->>>>>>> origin/master
 
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
@@ -81,20 +69,6 @@ if ( is_writable("$server_files_dir/settings.ini") ) {
 }
 else
 	echo 'Settings file not writable';
-
-// Add config element to JSON array
-if ( isset($_POST['authCode']) && !empty($_POST['authCode']) ) {
-	$authCode = $_POST['authCode'];
-	try {
-		list($accessToken, $dropboxUserId) = $webAuth->finish($authCode);
-	}
-	catch(Exception $e) {
-		nmcli_network_up('wlan0');
-		list($accessToken, $dropboxUserId) = $webAuth->finish($authCode);
-	}
-	$json[$_POST['configFile']] = $accessToken;
-	file_put_contents( "$server_files_dir/accounts.json", json_encode($json) );
-}
 
 // Upload accounts.json file
 function process_accounts_upload() {
@@ -127,87 +101,21 @@ try {
 	alert_error('Problem with accounts.json file, please try reuploading');
 }
 
-<<<<<<< HEAD
+// Add config element to JSON array
+if ( isset($_POST['authCode']) && !empty($_POST['authCode']) ) {
+	$authCode = $_POST['authCode'];
+	try {
+		list($accessToken, $dropboxUserId) = $webAuth->finish($authCode);
+	}
+	catch(Exception $e) {
+		nmcli_network_up('wlan0');
+		list($accessToken, $dropboxUserId) = $webAuth->finish($authCode);
+	}
+	$json[$_POST['configFile']] = $accessToken;
+	file_put_contents( "$server_files_dir/accounts.json", json_encode($json) );
+}
 
 ?>
-=======
-if( isset($_FILES['uploadFile']['tmp_name']) )
-  echo 'File uploaded';
-foreach($_FILES as $key => $value)
-	echo $key.' '.$value;
-
-?>
-
-<div class='mainBackground'>
-<table class='spacedTable'>
-	<thead>
-		<tr>
-			<td><H1>Dropbox Settings</H1></td>
-			<td align='right'>
-				<a href='/help/help-dropbox.html' target='_blank'>Help</a>
-			</td>
-		</tr>
-	</thead>
-	<form id='finish' class='inputForm'>
-		<tbody>
-			<tr>
-				<td colspan='2'><H2>Add Dropbox Account</H2></td>
-			<tr>
-			<tr>
-				<td colspan='2'><P> Press the button below to link a Dropbox account.<br>
-					You will be taken to dropbox.com to authorize the app<br>
-					<br>
-					Return to this page once Dropbox is authorized </P>
-				</td>
-			</tr>
-			<tr>
-				<td colspan='2'>
-					<input type="button" style="max-width: 200px; min-width: 150px" name="start" value="Link Dropbox" class="submit" onclick="changeForm()">
-				</td>
-			</tr>
-			<tr><td colspan='2'><P> Enter a name for this config file and paste the code given by dropbox.com </P></td></tr>
-			<tr>
-				<td>Account Name:</td>
-				<td><input placeholder='Name of config file' name="configFile" type="text" class="setting"/></td>
-			</tr
-			><tr>
-				<td>Dropbox Token:</td>
-				<td><input placeholder='Paste Token Here' name="authCode" type="text" class="setting"/></td>
-			</tr>
-		</tbody>
-		<tbody>
-			<tr>
-				<td colspan='2'><H2>Manage Accounts</H2></td>
-			</tr>
-			<tr>
-				<td>Download Account File</td>
-				<td><a class='settings' href='/server_files/accounts.json' download>
-				<button>Download</button>
-				</a></td>
-			<tr>
-				<td>Upload Account File</td>
-				<td><input type="file" name="uploadFile"></td>
-			</tr>
-			<tr>
-				<td>Use Config:</td>
-				<td><?php $configs = array_slice($json,1);
-								generateConfigFilesDropdown($configs, 'configFile');?>
-				</td>
-			</tr>
-			<tr>
-				<td>Delete Config:</td>
-				<td><?php $configs = array_slice($json,1);
-								$configs['--'] = '--';
-								ksort($configs);
-								generateConfigFilesDropdown($configs, 'remove');?>
-				</td>
-			</tr>
-		</tbody>
-	</form>
-</table>
-<input type="submit" style="max-width: 300px" name="finish" value="Apply" class="submit">
-</div>
->>>>>>> origin/master
 <script>
 $(document).ready( function() {
 	
@@ -232,25 +140,25 @@ $(document).ready( function() {
 	<form id='finish' method="POST" class='inputForm' onsubmit='return validateForm()' enctype="multipart/form-data">
 		<tbody colspan='2' style='border:thin solid black'>
 			<tr>
-				<td colspan='2'><H2>Add Dropbox Account</H2></td>
+				<td colspan='2'><H2 class='table_heading'>Add Dropbox Account</H2></td>
 			<tr>
 			<tr>
-				<td colspan='2'><H4>Step 1 - Authorize Superliminal on Dropbox.com</H4></td>
+				<td colspan='2'><H4 class='table_heading'>Step 1 - Authorize Superliminal on Dropbox.com</H4></td>
 			</tr>
 			<tr>
 				<td colspan='2'><P> Press the button below to link a Dropbox account.
 					You will be taken to dropbox.com to authorize Superliminal.
-					Return to this page once Dropbox is authorized. </P>
+					Copy the token given to you during the authorization process and return to this page. </P>
 				</td>
 			</tr>
 			<tr>
 				<td colspan='2'>
-					<a href='<?php echo $authorizeUrl ?>' target='_blank' style="max-width: 200px;" name="start" value="Link Dropbox" class="submit">Link Dropbox</a>
+					<a href="javascript:window.open('<?php echo $authorizeUrl ?>','Link Dropbox','width=600,height=550')" 
+						style="max-width: 150px; min-width:100px; margin: 15px auto;" name="start" value="Link Dropbox" class="submit">Link Dropbox</a>
 				</td>
 			</tr>
-			<tr><td><br></td></tr>
 			<tr>
-				<td colspan='2'><H4>Step 2 - Paste Authorization Token</H4></td>
+				<td colspan='2'><H4 class='table_heading'>Step 2 - Paste Authorization Token</H4></td>
 			</tr>
 			<tr>
 				<td colspan='2'><P> Enter a name that Superliminal will remember this account by and paste the code given by 
@@ -264,14 +172,16 @@ $(document).ready( function() {
 				<td>Dropbox Token:</td>
 				<td><input placeholder='Paste token here' id='dropbox_token' name="authCode" type="text" class="setting"/></td>
 			</tr>
+			<tr>
+				<td colspan='2'><br><input type="submit" style="max-width: 300px" name="finish" value="Finish" class="submit"></td>
+			</tr>
 		</tbody>
-		<tr><td><br></tr></tr>
 		<tbody>
 			<tr>
-				<td colspan='2'><H2>Manage Accounts</H2></td>
+				<td colspan='2'><H2 class='table_heading'>Manage Accounts</H2></td>
 			</tr>
 			<tr>
-				<td colspan='2'><H4>Download/Upload</H4></td>
+				<td colspan='2'><H4 class='table_heading'>Download/Upload</H4></td>
 			</tr>
 			<tr>
 				<td colspan='2'><P>Here you can download or upload a master list of all linked dropbox accounts.
@@ -287,7 +197,7 @@ $(document).ready( function() {
 				<td><input type="file" accept='.json' id='uploadFile' name="uploadFile"></td>
 			</tr>
 			<tr>
-				<td colspan='2'><H4>Activate/Delete</H4></td>
+				<td colspan='2'><H4 class='table_heading'>Activate/Delete</H4></td>
 			</tr>
 			<tr>
 				<td colspan='2'><P>Choose the linked Dropbox account to use or delete an account from the

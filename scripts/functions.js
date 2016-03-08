@@ -139,10 +139,11 @@ function scan() {
 				$.each(data, function(index, value) {
 					list.push('<tr><td><P>' + value['ssid'] + '</P></td><td><P>' + value['signal']+'</P><td></tr>');
 				});
-				$('#networks').append(list);
+				$('#scan_results').append(list);
 				
 				$('#loading').hide();
-				$('#networks').show();
+				$('#scan_results').show();
+				$('#known_networks').show();
 			},
 			error: function(jqXHR, textStatus, errorThrown){
 				console.log(errorThrown);
