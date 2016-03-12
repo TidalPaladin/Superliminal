@@ -67,6 +67,9 @@ Superliminal was designed and tested on Raspbian Jessie, no other operating syst
     cp rc.local /etc
     
     cp 000-default.conf /etc/apache2/sites-available
-    
-    
     ```
+    * **Edit interfaces**
+    ```
+    sudo nano /etc/network/interfaces
+    ```
+    Remove wlan0
