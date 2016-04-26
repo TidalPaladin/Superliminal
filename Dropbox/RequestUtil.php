@@ -16,11 +16,11 @@ if ($mbstring_func_overload & 2 == 2) {
     throw new \Exception("The Dropbox SDK doesn't work when mbstring.func_overload is set to overload the standard string functions (value = ".var_export($mbstring_func_overload, true).").  Library: \"" . __FILE__ . "\".");
 }
 
-if (strlen((string) PHP_INT_MAX) < 19) {
+//if (strlen((string) PHP_INT_MAX) < 19) {
     // Looks like we're running on a 32-bit build of PHP.  This could cause problems because some of the numbers
     // we use (file sizes, quota, etc) can be larger than 32-bit ints can handle.
-    throw new \Exception("The Dropbox SDK uses 64-bit integers, but it looks like we're running on a version of PHP that doesn't support 64-bit integers (PHP_INT_MAX=" . ((string) PHP_INT_MAX) . ").  Library: \"" . __FILE__ . "\"");
-}
+//    throw new \Exception("The Dropbox SDK uses 64-bit integers, but it looks like we're running on a version of //PHP that doesn't support 64-bit integers (PHP_INT_MAX=" . ((string) PHP_INT_MAX) . ").  Library: \"" . __FILE__ //. "\"");
+//}
 
 /**
  * @internal
