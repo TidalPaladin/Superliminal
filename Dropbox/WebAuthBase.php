@@ -6,8 +6,11 @@ namespace Dropbox;
  */
 class WebAuthBase extends AuthBase
 {
-    protected function _getAuthorizeUrl($redirectUri, $state)
+    protected function _getAuthorizeUrl($redirectUri, $state, $forceReapprove = false)
     {
+        if ($forceReapprove === false) {
+            $forceReapprove = null;  // Don't include it in the URL if it's the default value.
+        }
         return RequestUtil::buildUrlForGetOrPut(
             $this->userLocale,
             $this->appInfo->getHost()->getWeb(),
@@ -17,6 +20,7 @@ class WebAuthBase extends AuthBase
                 "response_type" => "code",
                 "redirect_uri" => $redirectUri,
                 "state" => $state,
+                "force_reapprove" => $forceReapprove,
             ));
     }
 
