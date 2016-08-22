@@ -73,7 +73,16 @@ function update_settings_ini() {
 		$settings = $_POST['setting_ini'];
 	
 	debug_to_console('Updating settings.ini');
-	
+
+	if( !is_writable($path) ) {
+		echo '<script>alert("Error: Settings.ini not writable");</script>';
+		return $settings_old;
+	}
+	else if ( !is_writable('/var/www/html/server_files') ){
+		echo '<script>alert("Error: Server files directory not writable");</script>';
+		return $settings_old;
+	}
+
 	// Scan $_POST['settings_ini'] and make replacements
 	foreach ($settings as $key => $value) {
 		$value = preg_replace("/[^A-Za-z0-9 ]/", '', trim($value,' '));

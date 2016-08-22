@@ -37,7 +37,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Superliminal.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
+<html>
 <head>
 <title>Superliminal - General</title>
 <link rel="stylesheet" type="text/css" href="/styles/wizard.css">
@@ -183,3 +183,4 @@ $(document).ready(function() {
 </form>
 </div>
 </body>
+</html>

@@ -110,4 +110,3 @@ function echo_Failure {
 #----------------------------------------------------------------------------------------------------------------
 
 readConfig &>/dev/null						#Apply settings
-loadDisplay &>/dev/null						#Start slideshow

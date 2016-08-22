@@ -29,6 +29,7 @@ mkdir /var/www/html/flyers
 chown -R :www-data /var/www/html
 chmod -R 755 /var/www/html
 chmod 775 /var/www/html/server_files/accounts.json /var/www/html/server_files/settings.ini
+chmod 775 /var/www/html/server_files
 chown -R root:root /var/www/html/system_files
 chmod -R 755 /var/www/html/system_files
 
@@ -54,19 +55,16 @@ editLXDE 'xset -dpms' '@xset -dpms'
 editLXDE 'xset s noblank' '@xset s noblank'
 sed -i '/xscreensaver/d' /home/pi/.config/lxsession/LXDE-pi/autostart
 
-#Edit config.txt with necessary sections
+# Edit LXDE to autostart teamviewer script
+editLXDE 'teamviewer' '@bash /var/www/html/scripts/teamviewer_autoclose.sh'
 
-# hdmi_group=1
-editConfig 'hdmi_group' '1'
+#Edit config.txt with necessary sections
 
 # disable_overscan=1
 editConfig 'disable_overscan' '1'
 
 # hdmi_force_hotplug=1
 editConfig 'hdmi_force_hotplug' '1'
-
-# hdmi_mode=4
-editConfig 'hdmi_mode' '4'
 
 # Framebuffer width and height
 editConfig 'framebuffer_width' '1920'
