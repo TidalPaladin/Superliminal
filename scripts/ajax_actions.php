@@ -38,11 +38,8 @@ along with Superliminal.  If not, see <http://www.gnu.org/licenses/>.
 header('HTTP/1.1 200');
 header('Content-Type: application/json; charset=UTF-8');
 error_reporting();
-
 require_once "/var/www/html/Dropbox/autoload.php";
 use \Dropbox as dbx;
-
-
 if ( !isset($_POST['action']) ) {
 	header('HTTP/1.1 500 No Action Specified');
 	die();
@@ -127,7 +124,7 @@ function usb($count) {
 	}
 	
 	if( empty($files) ) {
-		header('HTTP/1.1 500 Internal Server');
+		header('HTTP/1.1 500 USB Empty');
 		die();
 	}
 	
@@ -147,6 +144,7 @@ function usb($count) {
  
 // Download from Dropbox
 function dropbox_download() {
+
 	// Set path to settings file and import to array $settings
 	$server_files_dir = '/var/www/html/server_files';
 	$settings = parse_ini_file("$server_files_dir/settings.ini");
@@ -156,14 +154,16 @@ function dropbox_download() {
 	$flyers_path = '/var/www/html/flyers/';
 	if ( !file_exists($flyers_path) )
 		mkdir($flyers_path, 0775);
-		
+	else if( !is_writable($flyers_path) ) {
+		header('HTTP/1.1 500 Flyers dir not writable');
+        	die();
+	}
 	// Pull local image filenames into $local_files
 	$local = array_slice(scandir($flyers_path), 2);
 	$local_files = array();
 	foreach ($local as $key => $value ) 
 		$local_files[$value] = filesize('/var/www/html/flyers/'.$value);
-		
-	
+
 	// Try to load token from accounts.json
 	if ( array_key_exists($settings['configFile'],$json) ) {
 		$accessToken = $json[$settings['configFile']];
@@ -173,7 +173,6 @@ function dropbox_download() {
 		header('HTTP/1.1 500 Account Missing');
 		die('Missing Dropbox account');
 	}
-	
 	// Try to set up dropbox
 	$count = 0; $max_tries = 5;
 	$done = false;
@@ -183,13 +182,11 @@ function dropbox_download() {
 			$dbxClient = new dbx\Client($accessToken, "PHP-Example/1.0");
 			$folderMetadata = $dbxClient->getMetadataWithChildren("/");
 			$accountInfo = $dbxClient->getAccountInfo();
-			
 			// Parse dropbox files to $files as [ $file => $size ]
 			$files = array();
 			foreach ($folderMetadata['contents'] as $key => $meta) {
 				$files[ltrim($meta['path'],'/')] = $meta['bytes'];
 			}
-			
 			// Delete local files no longer in Dropbox
 			$deleted_files = array();
 			foreach ( $local_files as $local_file => $size ) {
@@ -198,12 +195,10 @@ function dropbox_download() {
 					$deleted_files[] = $local_file;
 				}
 			}
-			
 			// Download Dropbox files if not saved locally or if size has changed
 			$downloaded_files = array();
 			foreach ( $files as $file => $size ) {
 				$filePath = $flyers_path.$file;
-				
 				// If $file isnt in $local_files and 
 				if ( !array_key_exists($file, $local_files) || $local_files[$file] != $size ) {
 					$f = fopen($flyers_path.'/'.$file, "w+b");
@@ -213,7 +208,6 @@ function dropbox_download() {
 					$downloaded_files[] = $file;
 				} 
 			}
-	
 			// Assemble array to return to calling function
 			header('HTTP/1.1 200');
 			$return = array( 
@@ -225,26 +219,11 @@ function dropbox_download() {
 			echo json_encode($return, JSON_PRETTY_PRINT);
 			$done = true;
 		}
-			catch (InvalidArgumentException $e) {
-				$count++;
-				exec('sudo nmcli dev connect wlan0');
-				if( $count > $max_tries ) {
-					header('HTTP/1.1 500 Network Error?');
-					$string = $e->getMessage(); 
-					$s = explode(': ',$string);
-					die(str_replace( array('}',"\""), '', $s[1] ));
-				}
-			}
 			catch ( dbx\Exception $e ) {
-				$count++;
-				// Make sure connection is properly up
-				exec('sudo nmcli dev connect wlan0');
-				if( $count > $max_tries ) {
 					header('HTTP/1.1 500 General Dropbox Error');
 					$string = $e->getMessage(); 
 					$s = explode(': ',$string);
 					die( str_replace( array('}',"\""), '', $s[1] ) );
-				}
 			}
 		
 	}
