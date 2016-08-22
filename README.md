@@ -1,6 +1,8 @@
 # Superliminal
 Superliminal is a digital signage solution designed to provide private and commercial users with a cost effective, customizable, and always-on solution for viewing images on a TV.
 
+**Superliminal is currently undergoing some major overhauls, some instability is to be expected until I can find the time to adapt the software**
+
 ## Key Features
   * **Simple User Interface** - 
   Superliminal's web interface allows for easy setup without requiring the user to access command line interfaces.  During startup a keyboard may be used to access a setup page, where all of Superliminal's options are accessible.
